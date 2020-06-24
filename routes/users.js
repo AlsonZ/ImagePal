@@ -1,5 +1,5 @@
 const express = require('express');
-const bcrypt = require('bycrptjs');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const router = express.Router();
 
@@ -29,14 +29,23 @@ router.post('/logout', (req, res) => {
 })
 
 router.post('/register', checkDuplicateUser, async (req, res) => {
-  
+  const password = bcrypt.hashSync(req.body.password, 10);
+  const user = new User({
+    registerIP: req.ip,
+    email: req.body.email.toLowerCase(),
+    username: req.body.username,
+    password: password,
+  });
+  user.save();
+  console.log('new user registered: ' + req.body.email);
+  res.status(201).json('registered');
 });
 
 async function checkDuplicateUser(req, res, next) {
   if(await checkElement(email, req.body.email.toLowerCase())) {
     // send error
     return res.status(409).json({message: "Email already exists!"})
-  } else if(await checkElement(userName, req.body.userName)) {
+  } else if(await checkElement(username, req.body.userName)) {
     return res.status(409).json({message: "Username already exists!"})
   } else {
     next();
