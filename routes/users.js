@@ -28,19 +28,19 @@ router.post('/logout', (req, res) => {
   res.json('logout success');
 })
 
-router.post('/register', checkEmail, checkUsername, async (req, res) => {
+router.post('/register', checkDuplicateUser, async (req, res) => {
   
 });
 
-async function checkEmail(req, res, next) {
+async function checkDuplicateUser(req, res, next) {
   if(await checkElement(email, req.body.email.toLowerCase())) {
     // send error
     return res.status(409).json({message: "Email already exists!"})
+  } else if(await checkElement(userName, req.body.userName)) {
+    return res.status(409).json({message: "Username already exists!"})
   } else {
-    // continue
     next();
   }
-  
 }
 async function checkElement(elementName, element) {
   let user;
@@ -49,6 +49,8 @@ async function checkElement(elementName, element) {
     if (user !== undefined) {
       //user with email exists
       return true;
+    } else {
+      return false;
     }
   } catch {
     // user does not exist
