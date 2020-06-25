@@ -1,10 +1,10 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
-import Nav from './navbar';
-import Login from './entry/login.js';
-import Register from './entry/register.js';
-import Frontpage from './frontpage';
+import Nav from './NavComponent';
+import Frontpage from './FrontPageComponent';
+import Login from './EntryComponent/LoginComponent.js';
+import Register from './EntryComponent/RegisterComponent.js';
 
 function App() {
   return (

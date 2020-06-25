@@ -38,15 +38,15 @@ router.post('/register', checkDuplicateUser, async (req, res) => {
   });
   user.save();
   console.log('new user registered: ' + req.body.email);
-  res.status(201).json('registered');
+  res.status(201).json({message: 'registered'});
 });
 
 async function checkDuplicateUser(req, res, next) {
-  if(await checkElement(email, req.body.email.toLowerCase())) {
+  if(await checkElement("email", req.body.email.toLowerCase())) {
     // send error
-    return res.status(409).json({message: "Email already exists!"})
-  } else if(await checkElement(username, req.body.userName)) {
-    return res.status(409).json({message: "Username already exists!"})
+    return res.status(409).json({error: "Email already exists!"})
+  } else if(await checkElement("username", req.body.username)) {
+    return res.status(409).json({error: "Username already exists!"})
   } else {
     next();
   }

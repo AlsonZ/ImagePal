@@ -1,0 +1,90 @@
+.entry {
+  width: 85%; /* for mobiles with width smaller than 360 */
+  max-width: 24rem; /* for web so the box isnt so big */
+  padding: 1rem 3rem 5rem 3rem;
+  background: white;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+.entry h1{
+  color: var(--base-colour);
+	margin: 0;
+	padding: 2rem 0rem;
+  font-size: 2rem;
+  user-select: none;
+  /* animation: fadeIn 1s; */
+}
+
+.input {
+  display: inline-block;
+  font-size: 1.125rem;
+	color: var(--dark-highlight-colour);
+	background-color: var(--textbox-colour);
+	width: 100%;
+  padding: 13px 20px 13px 20px;
+  margin: 0 0 1.3rem 0;
+	box-sizing: border-box;
+	border: 3px solid rgba(0,0,0,0);
+	/* animation: fadeIn 1s; */
+}
+.input:focus {
+	background: white;
+	border: 3px solid var(--base-colour);
+	outline: none;
+}
+
+.submit {
+  width: 100%;
+  padding: 1.2rem 20px;
+  background-color: var(--base-colour);
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 0.5vh;
+  border: none;
+  /* animation: fadeIn 1s; */
+}
+
+.submit:hover {
+  filter: brightness(90%);
+}
+
+.submit:active {
+  filter: brightness(115%);
+}
+
+.submit:focus {
+  outline: none;
+  box-shadow: 0 0 4px #000000;
+}
+
+.entry-link {
+  color: var(--base-colour);
+  text-decoration: none;
+  font-size: 0.85rem;
+  /* animation: fadeIn 1s; */
+}
+.entry-link:active {
+  filter: brightness(115%);
+}
+
+.error-text {
+  color: red;
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0;
+  user-select: none;
+}
+.error-visible {
+  opacity: 1;
+}
+
+/* .normal-text {
+  color: var(--base-colour);
+  font-size: large;
+} */
+
+/* .logout {
+  margin-top: 2rem;
+} */

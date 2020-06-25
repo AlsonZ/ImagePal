@@ -3,8 +3,10 @@ nav {
   display: flex;
   flex-direction: row;
   min-width: 100%;
-  max-height: 5rem;
+  min-height: 5rem;
   position: fixed;
+  top: 0;
+  left: 0;
 }
 nav ul {
   font-size: 2.5rem;
@@ -26,7 +28,7 @@ nav .links {
   color: var(--heading-colour);
 }
 nav .links:hover {
-  color: var(--dark-highlight-colour);
+  color: var(--textbox-colour);
   transform: translateY(1px);
 }
 nav ul .links:not(:first-child) {

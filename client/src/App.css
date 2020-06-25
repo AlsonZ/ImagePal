@@ -1,17 +1,21 @@
 * {
   --base-colour: #279AF1;
   --highlight-colour: #23B5D3;
-  --dark-highlight-colour: #2541B2;
+  --dark-highlight-colour: #1a6fb1;
   --text-colour: black;
   --heading-colour: white;
+  --textbox-colour: #E6E6E6;
 }
 
 .App {
-  background-color: red;
+  background-color: white;
   height: 100vh;
+  display: flex;
 }
 
 .posts {
-  background-color: rgb(224, 222, 193);
-  height: 100%;
+  background-color: #E6E6E6;
+  width: 100%;
+  margin-top: 5rem;
+  display: flex;
 }
