@@ -1,0 +1,75 @@
+.frontpage {
+  /* background-color: darkgoldenrod; */
+  max-width: 100%;
+  width: 65rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 20fr;
+  grid-template-areas: "sorting sidebar"
+                       "posts sidebar";
+}
+.frontpage .sorting-parent {
+  grid-area: sorting;
+  width: auto;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+}
+.frontpage .sorting {
+  background-color: white;
+  width: 45rem;
+  max-width: 95%;
+  margin: 1rem;
+  border: 1px solid lightgrey;
+}
+
+.frontpage .posts-parent {
+  grid-area: posts;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.frontpage .sidebar {
+  grid-area: sidebar;
+}
+
+.frontpage .sidebar-box {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+  margin: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+.frontpage .sidebar-box h1 {
+  background-color: var(--dark-highlight-colour);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: normal;
+  padding: 0.5rem;
+  border-radius: 3px;
+  margin: 0;
+}
+.frontpage .sidebar-box p {
+  margin: 0.6rem;
+}
+
+@media only screen and (max-width: 65rem) {
+  .frontpage {
+    grid-template-columns: 1fr;
+    grid-template-areas: "sorting "
+                         "posts ";
+  }
+  .sidebar {
+    display: none;
+  }
+  .frontpage .sorting {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

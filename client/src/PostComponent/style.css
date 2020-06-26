@@ -1,0 +1,17 @@
+.post {
+  background-color: white;
+  width: 45rem;
+  max-height: 25rem;
+  max-width: 95%;
+  margin: 1rem;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+}
+
+
+@media only screen and (max-width: 65rem) {
+  .post {
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

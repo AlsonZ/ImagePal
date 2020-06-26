@@ -22,9 +22,12 @@ router.post('/login', async (req, res) => {
         //password is wrong
         return res.status(409).json("error");
       }
+    } else {
+      //email is wrong
+      return res.status(409).json("error");
     }
   } catch(error) {
-    //big error, 
+    //big error
     return res.status(500).json("error");
   }
 });
