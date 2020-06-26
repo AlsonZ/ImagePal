@@ -32,8 +32,8 @@ const Register = (props) => {
     });
     const resData = await res.json();
     if(resData.message === "registered") {
-      setEmail('');
-      setPassword('');
+      // setEmail('');
+      // setPassword('');
       props.history.push('/Login');
     } else {
       setErrorMessage(resData.error);
@@ -62,7 +62,7 @@ const Register = (props) => {
       <input type="text" placeholder="Username" className="input" onChange={event => setUsername(event.target.value)} autoComplete="off"></input>
       <input type="password" placeholder="Password" className="input" onChange={event => setPassword(event.target.value)} autoComplete="off"></input>
       <input type="submit" onClick={onClick} className="submit" value="Sign Up"></input>
-      <Link to='/' className="entry-link">Already have an account? Sign in</Link>
+      <Link to='/Login' className="entry-link">Already have an account? Sign in</Link>
     </form>
   );
 }

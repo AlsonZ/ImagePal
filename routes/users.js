@@ -3,23 +3,29 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const router = express.Router();
 
-router.get('/login', async (req, res) => {
-  if(req.session.userID) {
+router.post('/login', async (req, res) => {
+  // if(req.session.userID) {
     //if user is already logged in
-  }
+  // }
   let user;
   try {
     [user] = await User.find({email: req.body.email.toLowerCase()});
     if(user) {
-      if(bycrpyt.compareSync(req.body.password, user.password)) {
-        res.session.userID = user.email;
-        return res.status(200).json(res.session.userID);
+      if(bcrypt.compareSync(req.body.password, user.password)) {
+        // res.session.userID = user.email;
+        const userData = {
+          email: user.email,
+          username: user.username
+        }
+        return res.status(200).json(userData);
       } else {
         //password is wrong
+        return res.status(409).json("error");
       }
     }
   } catch(error) {
     //big error, 
+    return res.status(500).json("error");
   }
 });
 

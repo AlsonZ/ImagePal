@@ -5,6 +5,7 @@
   background: white;
   box-sizing: border-box;
   margin: auto;
+  animation: fadeIn 1s;
 }
 
 .entry h1{
@@ -13,7 +14,6 @@
 	padding: 2rem 0rem;
   font-size: 2rem;
   user-select: none;
-  /* animation: fadeIn 1s; */
 }
 
 .input {
@@ -26,7 +26,6 @@
   margin: 0 0 1.3rem 0;
 	box-sizing: border-box;
 	border: 3px solid rgba(0,0,0,0);
-	/* animation: fadeIn 1s; */
 }
 .input:focus {
 	background: white;
@@ -42,7 +41,6 @@
   font-size: 1.1rem;
   border-radius: 0.5vh;
   border: none;
-  /* animation: fadeIn 1s; */
 }
 
 .submit:hover {
@@ -62,7 +60,6 @@
   color: var(--base-colour);
   text-decoration: none;
   font-size: 0.85rem;
-  /* animation: fadeIn 1s; */
 }
 .entry-link:active {
   filter: brightness(115%);
@@ -88,3 +85,4 @@
 /* .logout {
   margin-top: 2rem;
 } */
+
