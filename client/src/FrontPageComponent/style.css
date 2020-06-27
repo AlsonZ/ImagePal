@@ -9,6 +9,7 @@
   grid-template-rows: 1fr 20fr;
   grid-template-areas: "sorting sidebar"
                        "posts sidebar";
+  animation: fadeIn 1s;
 }
 .frontpage .sorting-parent {
   grid-area: sorting;
@@ -25,13 +26,16 @@
   max-width: 95%;
   margin: 1rem;
   border: 1px solid lightgrey;
+  display: flex;
+  justify-content: center;
 }
 
 .frontpage .posts-parent {
   grid-area: posts;
   max-width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  /* justify-content: center; */
 }
 
 .frontpage .sidebar {
@@ -57,6 +61,26 @@
 }
 .frontpage .sidebar-box p {
   margin: 0.6rem;
+}
+
+.frontpage .button {
+  padding: 0.3rem 1rem;
+  padding-bottom: 0.4rem;
+  user-select: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  border: 1.6px solid var(--dark-highlight-colour);
+  border-radius: 5rem;
+  background-color: rgb(247, 247, 247);
+  color: var(--dark-highlight-colour);
+  margin: 0.6rem 1rem;
+  display: inline-block;
+}
+.frontpage .button:hover {
+  filter: brightness(110%);
+}
+.frontpage .button:active {
+  filter: brightness(90%);
 }
 
 @media only screen and (max-width: 65rem) {

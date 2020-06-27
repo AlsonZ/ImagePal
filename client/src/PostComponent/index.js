@@ -9,7 +9,8 @@ const Post = (props) => {
         Posted by {props.post.username}
       </div>
       <div className="image">
-        {props.post.image}
+        {/* {props.post.image} */}
+        <img src={props.post.image} height={props.post.height} width={props.post.width}/>
       </div>
       <div className="emojis">
         emoji's here

@@ -4,8 +4,24 @@
   max-height: 25rem;
   max-width: 95%;
   margin: 1rem;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 1px solid lightgrey;
+}
+
+.post .user, .post .emojis {
+  background-color: rgb(247, 247, 247);
+  padding: 0.5rem;
+  padding-left: 5%;
+  border-radius: 5px;
+}
+
+.post .user {
+  color: grey;
+}
+
+.post .image {
+  display: flex;
+  justify-content: center;
 }
 
 

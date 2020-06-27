@@ -1,25 +1,46 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Post from '../PostComponent'
 import {PostContext} from '../Contexts/PostsContext';
 import './style.css';
 
 const Frontpage = () => {
 
-  const postdata = {
-    username: "bob",
-    image: "image",
+  // const postsData = useContext(PostContext);
 
+  const postdata1 = {
+    username: "bob",
+    image: "/images/bio.jpg",
+    height: "320px",
+    width: "600px",
+    date: "Sun Jun 28 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
+  }
+  const postdata2 = {
+    username: "bob",
+    image: "/images/chem.jpg",
+    height: "320px",
+    width: "600px",
+    date: "Sun Jun 29 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
+  }
+  const postData = [postdata1, postdata2];
+
+  const loadPosts = () => {
+    return(postData.map((post) => 
+      <Post post={post}/>
+    ))
   }
 
   return (
     <div className="frontpage">
       <div className="sorting-parent">
         <div className="sorting">
-          sorting goes here
+          <span className="button">New</span>
+          <span className="button">Top</span>
         </div>
       </div>
       <div className="posts-parent">
-        <Post post={postdata}/>
+        {loadPosts()}
+        {/* <Post post={postdata1}/> */}
+        {/* <Post post={postdata2}/> */}
       </div>
       <div className="sidebar">
         <div className="sidebar-box about">
