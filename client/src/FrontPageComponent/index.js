@@ -30,29 +30,34 @@ const Frontpage = () => {
   }
 
   return (
-    <div className="frontpage">
-      <div className="sorting-parent">
-        <div className="sorting">
-          <span className="button">New</span>
-          <span className="button">Top</span>
+    <>
+      <div className="overlay">
+        <div className="upload-button">+</div>
+      </div>
+      <div className="frontpage">
+        <div className="sorting-parent">
+          <div className="sorting">
+            <span className="button">New</span>
+            <span className="button">Top</span>
+          </div>
+        </div>
+        <div className="posts-parent">
+          {loadPosts()}
+          {/* <Post post={postdata1}/> */}
+          {/* <Post post={postdata2}/> */}
+        </div>
+        <div className="sidebar">
+          <div className="sidebar-box about">
+            <h1>About Community</h1>
+            <p>About the Imagepal Forum</p>
+          </div>
+          <div className="sidebar-box rules">
+            <h1>Rules</h1>
+            <p>Do not post image with Text</p>
+          </div>
         </div>
       </div>
-      <div className="posts-parent">
-        {loadPosts()}
-        {/* <Post post={postdata1}/> */}
-        {/* <Post post={postdata2}/> */}
-      </div>
-      <div className="sidebar">
-        <div className="sidebar-box about">
-          <h1>About Community</h1>
-          <p>About the Imagepal Forum</p>
-        </div>
-        <div className="sidebar-box rules">
-          <h1>Rules</h1>
-          <p>Do not post image with Text</p>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
