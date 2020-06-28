@@ -35,6 +35,7 @@
   margin: 1rem;
   text-align: center;
   font-size: 1.1rem;
+  border-radius: 3px;
 }
 .new-post form .custom-file-input .file-name {
   float: left;
@@ -59,4 +60,5 @@
   margin: 1rem;
   border: 1px solid #ccc;
   cursor: pointer;
+  border-radius: 4px;
 }

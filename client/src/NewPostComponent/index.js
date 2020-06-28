@@ -3,7 +3,7 @@ import './style.css';
 
 const NewPost = (props) => {
 
-  const [fileName, setFileName] = useState();
+  const [fileName, setFileName] = useState("Choose File");
 
   const showName = (e) => {
     setFileName(e.target.files[0].name);

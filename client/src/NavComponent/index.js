@@ -9,7 +9,7 @@ const Nav = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    console.log(`testing use userID change ${userID.email}`);
+    // console.log(`testing use userID change ${userID.email}`);
     //change Sign in and Sign up to profile link
     if(userID.email !== "") {
       setIsLoggedIn(true);
