@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import Post from '../PostComponent'
+import Post from '../PostComponent';
+import {Link} from 'react-router-dom';
 import {PostContext} from '../Contexts/PostsContext';
 import './style.css';
 
@@ -21,7 +22,7 @@ const Frontpage = () => {
     width: "600px",
     date: "Sun Jun 29 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
   }
-  const postData = [postdata1, postdata2];
+  const postData = [postdata1, postdata2,postdata1, postdata2];
 
   const loadPosts = () => {
     return(postData.map((post) => 
@@ -32,7 +33,9 @@ const Frontpage = () => {
   return (
     <>
       <div className="overlay">
-        <div className="upload-button">+</div>
+        <Link to="/NewPost" className="links">
+          <div className="upload-button">+</div>
+        </Link>
       </div>
       <div className="frontpage">
         <div className="sorting-parent">
@@ -43,8 +46,6 @@ const Frontpage = () => {
         </div>
         <div className="posts-parent">
           {loadPosts()}
-          {/* <Post post={postdata1}/> */}
-          {/* <Post post={postdata2}/> */}
         </div>
         <div className="sidebar">
           <div className="sidebar-box about">

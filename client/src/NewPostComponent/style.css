@@ -1,0 +1,62 @@
+.new-post-parent {
+  width: 65rem;
+  height: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  animation: fadeIn 1s;
+}
+
+.new-post {
+  width: 95%;
+  height: 95%;
+  background-color: white;
+}
+
+.new-post h1 {
+  font-weight: normal;
+  text-align: center;
+  color: var(--dark-highlight-colour);
+}
+
+.new-post form {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-post form .custom-file-input {
+  border: 1px solid #ccc;
+  display: inline-block;
+  /* padding: 0.6rem; */
+  cursor: pointer;
+  margin: 1rem;
+  text-align: center;
+  font-size: 1.1rem;
+}
+.new-post form .custom-file-input .file-name {
+  float: left;
+  text-align: center;
+  padding: 0.6rem;
+}
+.new-post form .custom-file-input .browse {
+  background-color: lightgrey;
+  float: right;
+  padding: 0.6rem;
+}
+.new-post form .file-input {
+  position: fixed;
+  right: 100%;
+  bottom: 100%;
+}
+.new-post form .button {
+  background-color: var(--base-colour);
+  color: white;
+  font-size: 1.3rem;
+  padding: 0.6rem;
+  margin: 1rem;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}

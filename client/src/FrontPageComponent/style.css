@@ -2,11 +2,12 @@
   /* background-color: darkgoldenrod; */
   max-width: 100%;
   width: 65rem;
+  height: 100%;
   margin-left: auto;
   margin-right: auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 20fr;
+  grid-template-rows: 5.5rem 10fr;
   grid-template-areas: "sorting sidebar"
                        "posts sidebar";
   animation: fadeIn 1s;
@@ -87,13 +88,13 @@
 .overlay {
   width: 5rem;
   height: 5rem;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
 
 .overlay .upload-button {
-  background-color: var(--highlight-colour);
+  background-color: var(--base-colour);
   width: 4rem;
   height: 4rem;
   font-size: 4rem;
@@ -109,6 +110,10 @@
 }
 .overlay .upload-button:active {
   filter: brightness(90%);
+}
+
+.overlay .links {
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 65rem) {
