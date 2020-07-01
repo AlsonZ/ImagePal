@@ -19,7 +19,7 @@ const NewPost = (props) => {
     console.log(`orignal file size ${inputFile.size/1024/1024}`); 
     const options = {
       maxSizeMB: 1,
-      maxWidthOrHeight: 1024,
+      maxWidthOrHeight: 960,
       useWebWorker: true,
     }
     try {
@@ -45,15 +45,9 @@ const NewPost = (props) => {
     }
     let data = new FormData();
     data.append('file', file);
-    data.append('uploadedBy', 'user');
+    data.append('uploadedBy', user);
     data.append('uploadedAt', Date());
     // data.append('upload_preset', 'imagepal');
-    // let data = {
-    //   image: compressedFile,
-    //   uploadedBy: "user",
-    //   uploadedAt: Date(),
-
-    // }
     const url = '/API/posts/upload';
     const res = await fetch(url, {
       method: 'POST',
@@ -79,7 +73,7 @@ const NewPost = (props) => {
           </label>
           <input type="submit" className="button" value="Upload" onClick={handleImageUpload}/>
         </form>
-        <div>
+        <div className="img-parent">
           <img src={image}/>
         </div>
       </div>

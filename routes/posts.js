@@ -12,7 +12,6 @@ router.post('/upload', (req, res) => {
     return res.status(400).json('no file');
   }
   const file = req.files.file;
-  console.log(file.name);
   console.log(req.body.uploadedBy);
   console.log(req.body.uploadedAt);
 })

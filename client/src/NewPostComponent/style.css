@@ -12,7 +12,9 @@
 
 .new-post {
   width: 95%;
-  height: 95%;
+  min-height: 95%;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
   background-color: white;
 }
 
@@ -61,4 +63,10 @@
   border: 1px solid #ccc;
   cursor: pointer;
   border-radius: 4px;
+}
+
+.new-post .img-parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
