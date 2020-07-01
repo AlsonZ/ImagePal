@@ -1,22 +1,48 @@
 import React, { useState } from 'react';
+import imageCompression from 'browser-image-compression';
 import './style.css';
-import { setRandomFallback } from 'bcryptjs';
 
 const NewPost = (props) => {
 
   const [fileName, setFileName] = useState("Choose File");
   const [file, setFile] = useState('');
+  // const [compressedFile, setCompressedFile] = useState('');
   const [image, setImage] = useState('');
+  const [image2, setImage2] = useState('');
 
-  const showName = (e) => {
+  const handleImageChange = (e) => {
     setFileName(e.target.files[0].name);
-    setFile(e.target.files);
+    setFile(e.target.files[0]);
   }
-  const uploadImage = async (e) => {
+
+  const compressImage = async () => {
+    console.log(`orignal file size ${file.size/1024/1024}`); 
+    const options = {
+      maxSizeMB: 1,
+      maxWidthOrHeight: 1024,
+      useWebWorker: true,
+    }
+    try {
+      const cFile = await imageCompression(file, options);
+      // setCompressedFile(cFile);
+      console.log(`new file size ${cFile.size/1024/1024}`);
+      let oFReader = new FileReader();
+      oFReader.readAsDataURL(cFile);
+      oFReader.onload = (oFREvent) => {
+        setImage2(oFREvent.target.result);
+      }
+      return cFile;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleImageUpload = async (e) => {
     e.preventDefault();
-    console.log(file[0].name);
+    const compressedFile = await compressImage();
+    console.log(compressedFile.name);
     let data = new FormData();
-    data.append('file', file[0]);
+    data.append('file', file);
     data.append('upload_preset', 'imagepal');
     const url = '';//check .env file for url
     const res = await fetch(url, {
@@ -28,6 +54,8 @@ const NewPost = (props) => {
 
   }
 
+  
+
   return (
     <div className="new-post-parent">
       <div className="new-post">
@@ -37,12 +65,13 @@ const NewPost = (props) => {
           <label className="custom-file-input">
             <span className="file-name">{fileName}</span>
             <span className="browse">Browse</span>
-            <input type="file" className="file-input" onChange={showName}/>
+            <input type="file" accept="image/*" className="file-input" onChange={handleImageChange}/>
           </label>
-          <input type="submit" className="button" value="Upload" onClick={uploadImage}/>
+          <input type="submit" className="button" value="Upload" onClick={handleImageUpload}/>
         </form>
         <div>
           <img src={image}/>
+          <img src={image2}/>
         </div>
       </div>
     </div>

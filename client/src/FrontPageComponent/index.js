@@ -22,7 +22,14 @@ const Frontpage = () => {
     width: "600px",
     date: "Sun Jun 29 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
   }
-  const postData = [postdata1, postdata2,postdata1, postdata2];
+  const postdata3 = {
+    username: "bob",
+    image: "/images/chem.jpg",
+    height: "320px",
+    width: "600px",
+    date: Date(),
+  }
+  const postData = [postdata1, postdata2,postdata1, postdata2,];
 
   const loadPosts = () => {
     return(postData.map((post) => 
