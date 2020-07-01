@@ -1,35 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import imageCompression from 'browser-image-compression';
+import {UserContext} from '../Contexts/UserContext';
 import './style.css';
 
 const NewPost = (props) => {
 
+  const [user, setUser] = useContext(UserContext);
   const [fileName, setFileName] = useState("Choose File");
-  const [file, setFile] = useState('');
-  // const [compressedFile, setCompressedFile] = useState('');
+  const [inputFile, setInputFile] = useState('');
   const [image, setImage] = useState('');
-  const [image2, setImage2] = useState('');
 
   const handleImageChange = (e) => {
     setFileName(e.target.files[0].name);
-    setFile(e.target.files[0]);
+    setInputFile(e.target.files[0]);
   }
-
+  // move this into handle image change so it is a preview? as right now its on update
   const compressImage = async () => {
-    console.log(`orignal file size ${file.size/1024/1024}`); 
+    console.log(`orignal file size ${inputFile.size/1024/1024}`); 
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 1024,
       useWebWorker: true,
     }
     try {
-      const cFile = await imageCompression(file, options);
-      // setCompressedFile(cFile);
+      const cFile = await imageCompression(inputFile, options);
       console.log(`new file size ${cFile.size/1024/1024}`);
       let oFReader = new FileReader();
       oFReader.readAsDataURL(cFile);
       oFReader.onload = (oFREvent) => {
-        setImage2(oFREvent.target.result);
+        setImage(oFREvent.target.result);
       }
       return cFile;
     } catch (error) {
@@ -39,18 +38,29 @@ const NewPost = (props) => {
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-    const compressedFile = await compressImage();
-    console.log(compressedFile.name);
+    let file = await compressImage();
+    console.log(file.name);
+    if(file.size > inputFile.size) {
+      file = inputFile;
+    }
     let data = new FormData();
     data.append('file', file);
-    data.append('upload_preset', 'imagepal');
-    const url = '';//check .env file for url
+    data.append('uploadedBy', 'user');
+    data.append('uploadedAt', Date());
+    // data.append('upload_preset', 'imagepal');
+    // let data = {
+    //   image: compressedFile,
+    //   uploadedBy: "user",
+    //   uploadedAt: Date(),
+
+    // }
+    const url = '/API/posts/upload';
     const res = await fetch(url, {
       method: 'POST',
-      body: data
+      body: data,
     })
     const resData = await res.json();
-    setImage(resData.secure_url);
+    // setImage(resData.secure_url);
 
   }
 
@@ -71,7 +81,6 @@ const NewPost = (props) => {
         </form>
         <div>
           <img src={image}/>
-          <img src={image2}/>
         </div>
       </div>
     </div>

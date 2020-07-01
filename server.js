@@ -4,6 +4,7 @@ if(process.env.NODE_ENV !== 'production') {
 }
 const express = require('express');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
 const postsRouter = require('./routes/posts');
 const userRouter = require('./routes/users');
 
@@ -15,6 +16,7 @@ db.on('error', (error) => console.error(error));
 db.once('open', () => console.log('Connected to Database'));
 
 app.use(express.json());
+app.use(fileUpload());
 app.use('/API/posts', postsRouter);
 app.use('/API/users', userRouter);
 
