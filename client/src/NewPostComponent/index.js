@@ -11,8 +11,10 @@ const NewPost = (props) => {
   const [image, setImage] = useState('');
 
   const handleImageChange = (e) => {
-    setFileName(e.target.files[0].name);
-    setInputFile(e.target.files[0]);
+    if(e.target.files[0]) {
+      setFileName(e.target.files[0].name);
+      setInputFile(e.target.files[0]);
+    }
   }
   // move this into handle image change so it is a preview? as right now its on update
   const compressImage = async () => {
@@ -45,8 +47,10 @@ const NewPost = (props) => {
     }
     let data = new FormData();
     data.append('file', file);
+    data.append('fileName', file.name);
     data.append('uploadedBy', user);
     data.append('uploadedAt', Date());
+    // console.log(...data);
     // data.append('upload_preset', 'imagepal');
     const url = '/API/posts/upload';
     const res = await fetch(url, {
