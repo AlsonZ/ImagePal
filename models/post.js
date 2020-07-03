@@ -1,13 +1,12 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-  username: {
+  author: {
     type: String,
     required: true
   },
   uploadDate: {
     type: Date,
-    required: true,
     default: Date.now
   },
   imageUrl: {
@@ -15,17 +14,32 @@ const postSchema = new mongoose.Schema({
     retured: true
   },
   emoji: {
-    love: Number,
-    happy: Number,
-    sad: Number,
-    angry: Number,
-    evil: Number,
+    love: {
+      type: Number,
+      default: 0
+    },
+    happy: {
+      type: Number,
+      default: 0
+    },
+    sad: {
+      type: Number,
+      default: 0
+    },
+    angry: {
+      type: Number,
+      default: 0
+    },
+    evil: {
+      type: Number,
+      default: 0
+    },
   },
   comments: [{
     _id: {
       type: mongoose.Schema.Types.ObjectId,
     },
-    username: {
+    author: {
       type: String,
       required: true
     },

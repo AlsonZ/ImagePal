@@ -48,7 +48,7 @@ const NewPost = (props) => {
     let data = new FormData();
     data.append('file', file);
     data.append('fileName', file.name);
-    data.append('uploadedBy', user);
+    data.append('author', user);
     data.append('uploadedAt', Date());
     const url = '/API/posts/upload';
     const res = await fetch(url, {

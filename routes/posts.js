@@ -1,9 +1,6 @@
 const express = require('express');
-const fetch = require('node-fetch');
-const FormData = require('form-data');
-const fs = require('fs');
-const streamifier = require('streamifier');
 const cloudinary = require('cloudinary');
+const Post = require('../models/post');
 const router = express.Router();
 
 cloudinary.config({ 
@@ -28,10 +25,17 @@ router.post('/upload', async (req, res) => {
   if(imageLink === 'error') {
     return res.status(500);
   }
-
-  console.log(req.body.uploadedBy);
-  console.log(req.body.uploadedAt);
+  // console.log(req.body.author);
+  // console.log(req.body.uploadedAt);
   //make new post and save
+  const post = new Post({
+    author: req.body.author,
+    imageUrl: imageLink,
+    uploadDate: req.body.uploadedAt,
+  });
+  post.save();
+  console.log("New post created");
+  return res.status(201).json("New post created");
 })
 
 const handleImage = async (file, fileName) => {
