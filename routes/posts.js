@@ -44,13 +44,20 @@ const handleImage = async (file, fileName) => {
     console.log(error);
     return 'error';
   })
+
+  try {
+    const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
+    return result.url;
+  } catch(error) {
+    console.log(error);
+  }
   
   // cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal",(error, result) => {
   //   if(error) {
   //     console.log(error);
   //     return 'error';
   //   }
-  //   console.log(result);
+  //   console.log(result.url);
   //   return result.url;
   // });
 

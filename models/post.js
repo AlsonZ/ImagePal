@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
   },
   imageUrl: {
     type: String,
-    retured: true
+    required: true
   },
   emoji: {
     love: {
