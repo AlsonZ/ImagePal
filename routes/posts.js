@@ -40,15 +40,18 @@ const handleImage = async (file, fileName) => {
     console.log(error);
     return 'error';
   })
-  cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal",(error, result) => {
-    if(error) {
-      console.log(error);
-      return 'error';
-    }
-    console.log(result);
-    return result.url;
-  });
+  
+  // cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal",(error, result) => {
+  //   if(error) {
+  //     console.log(error);
+  //     return 'error';
+  //   }
+  //   console.log(result);
+  //   return result.url;
+  // });
 
+
+  
   // let data = new FormData();
   // data.append('file', file.data);
   // data.append('upload_preset', 'imagepal');

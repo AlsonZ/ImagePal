@@ -50,16 +50,13 @@ const NewPost = (props) => {
     data.append('fileName', file.name);
     data.append('uploadedBy', user);
     data.append('uploadedAt', Date());
-    // console.log(...data);
-    // data.append('upload_preset', 'imagepal');
     const url = '/API/posts/upload';
     const res = await fetch(url, {
       method: 'POST',
       body: data,
     })
     const resData = await res.json();
-    // setImage(resData.secure_url);
-
+    console.log(resData);
   }
 
   
