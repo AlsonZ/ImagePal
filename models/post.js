@@ -13,27 +13,23 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  emoji: {
-    love: {
-      type: Number,
-      default: 0
-    },
-    happy: {
-      type: Number,
-      default: 0
-    },
-    sad: {
-      type: Number,
-      default: 0
-    },
-    angry: {
-      type: Number,
-      default: 0
-    },
-    evil: {
-      type: Number,
-      default: 0
-    },
+  score: Number,
+  reactions: {
+    love: [{
+      type: String,
+    }],
+    happy: [{
+      type: String,
+    }],
+    sad: [{
+      type: String,
+    }],
+    angry: [{
+      type: String,
+    }],
+    evil: [{
+      type: String,
+    }],
   },
   comments: [{
     _id: {
@@ -49,5 +45,6 @@ const postSchema = new mongoose.Schema({
     comments: []
   }]
 })
+
 // first argument is singular name of collection -> auto convert to plural
-module.exports = mongoose.model('post', postSchema)
+module.exports = mongoose.model('Post', postSchema)

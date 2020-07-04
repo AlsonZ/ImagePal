@@ -20,7 +20,10 @@ const userSchema = new mongoose.Schema({
   registerDate: {
     type: Date,
     default: Date.now
+  },
+  user_token: {
+    type: String,
   }
 })
 // first argument is singular name of collection -> auto convert to plural
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('User', userSchema)

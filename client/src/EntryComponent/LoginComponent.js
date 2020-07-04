@@ -9,7 +9,7 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState('');
   const [errorMessage, setErrorMessage] = useState('placeholder');
-  const [, setUserID] = useContext(UserContext);
+  const [, setUser] = useContext(UserContext);
 
   const checkInput = () => {
     if(email === "" || password === "") {
@@ -35,7 +35,7 @@ const Login = (props) => {
     if(res.status === 200) {
       // setEmail('');
       // setPassword('');
-      setUserID(resData);
+      setUser(resData);
       props.history.push('/');
     } else {
       setErrorMessage('The email or password is incorrect');

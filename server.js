@@ -1,10 +1,10 @@
-
 if(process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 const express = require('express');
 const mongoose = require('mongoose');
 const fileUpload = require('express-fileupload');
+const session = require('express-session');
 const postsRouter = require('./routes/posts');
 const userRouter = require('./routes/users');
 
@@ -17,6 +17,18 @@ db.once('open', () => console.log('Connected to Database'));
 
 app.use(express.json());
 app.use(fileUpload());
+app.use(session({
+  secret: process.env.SECRET_HASH,
+  resave: false,
+  saveUninitialized: false,
+  proxy: true,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    // secure: false,
+    maxAge: 1000 * 60 * 60 * 24 * 7 // = 7 days 
+  }
+}));
 app.use('/API/posts', postsRouter);
 app.use('/API/users', userRouter);
 
