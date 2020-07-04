@@ -1,12 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Post from '../PostComponent';
 import {Link} from 'react-router-dom';
 import {PostContext} from '../Contexts/PostsContext';
+import {UserContext} from '../Contexts/UserContext';
 import './style.css';
 
 const Frontpage = () => {
 
-  // const postsData = useContext(PostContext);
+  // const [postsData] = useContext(PostContext);
+  const [user] = useContext(UserContext);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if(user.email !== "") {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false)
+    }
+  },[user])
 
   const postdata1 = {
     username: "bob",
@@ -39,11 +50,13 @@ const Frontpage = () => {
 
   return (
     <>
-      <div className="overlay">
-        <Link to="/NewPost" className="links">
-          <div className="upload-button">+</div>
-        </Link>
-      </div>
+      {isLoggedIn && 
+        <div className="overlay">
+          <Link to="/NewPost" className="links">
+            <div className="upload-button">+</div>
+          </Link>
+        </div>
+      }
       <div className="frontpage">
         <div className="sorting-parent">
           <div className="sorting">
