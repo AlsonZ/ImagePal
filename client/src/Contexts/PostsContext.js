@@ -9,10 +9,10 @@ export const PostsProvider = (props) => {
 //   comments: {},
 //   numberOfEmojiReactions: {},
 // });
-const [posts, setPosts] = useState([]);
-return(
-  <PostsContext.Provider value={[posts, setPosts]}>
-      {props.children}
-  </PostsContext.Provider>
-);
+  const [posts, setPosts] = useState([]);
+  return(
+    <PostsContext.Provider value={[posts, setPosts]}>
+        {props.children}
+    </PostsContext.Provider>
+  );
 }

@@ -1,16 +1,30 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Post from '../PostComponent';
 import {Link} from 'react-router-dom';
-import {PostContext} from '../Contexts/PostsContext';
+import {PostsContext} from '../Contexts/PostsContext';
 import {UserContext} from '../Contexts/UserContext';
 import './style.css';
 
 const Frontpage = () => {
 
-  // const [postsData] = useContext(PostContext);
+  const [posts, setPosts] = useContext(PostsContext);
   const [user] = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let res = await fetch('/API/posts/frontpage/10');
+      if(res.status === 200) {
+        const resData = await res.json();
+        console.log(resData);
+        setPosts(resData);
+      }
+    }
+    fetchData();
+  },[])
+  useEffect(() => {
+    //update state with posts?
+  },[posts])
   useEffect(() => {
     if(user.email !== "") {
       setIsLoggedIn(true);
@@ -43,7 +57,7 @@ const Frontpage = () => {
   const postData = [postdata1, postdata2,postdata1, postdata2,];
 
   const loadPosts = () => {
-    return(postData.map((post) => 
+    return(posts.map((post) => 
       <Post post={post}/>
     ))
   }

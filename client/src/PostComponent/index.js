@@ -6,11 +6,11 @@ const Post = (props) => {
   return (
     <div className="post">
       <div className="user">
-        Posted by {props.post.username}
+        Posted by {props.post.author}
       </div>
       <div className="image">
         {/* {props.post.image} */}
-        <img src={props.post.image} height={props.post.height} width={props.post.width}/>
+        <img src={props.post.imageUrl} height={props.post.height} width={props.post.width}/>
       </div>
       <div className="emojis">
         emoji's here

@@ -7,8 +7,17 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME, 
 });
 
-router.get('/frontpage', (req,res) => {
+router.get('/frontpage/:amount', async (req,res) => {
+  const end = req.params.amount;
+  const start = end-10;
   //send array of 10 images to front
+  const orderedPosts = await Post.find(null,null,{sort: {uploadDate: 1}});
+  orderedPosts.map((post) => {
+    console.log("ordered "+post.uploadDate)
+  })
+  const data = orderedPosts.slice(start, end);
+  // console.log(orderedPosts);
+  res.status(200).json(data);
 });
 
 
