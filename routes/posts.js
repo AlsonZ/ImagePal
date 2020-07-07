@@ -8,9 +8,11 @@ cloudinary.config({
 });
 
 router.get('/frontpage', (req,res) => {
-  //send array of 10 images to svr
+  //send array of 10 images to front
 });
 
+
+// need to add checkLogin here as middleware
 router.post('/upload', async (req, res) => {
   //get new uploaded post
   if(!req.files) {
@@ -18,22 +20,25 @@ router.post('/upload', async (req, res) => {
     return res.status(400).json('no file');
   }
   const file = req.files.file;
-  console.log('this is the file');
-  console.log(file);
+  // console.log('this is the file');
+  // console.log(file);
   //upload image to cloudinary for storage
   const imageLink = await handleImage(file, req.body.fileName);
   if(imageLink === 'error') {
     return res.status(500);
   }
-  // console.log(req.body.author);
-  // console.log(req.body.uploadedAt);
+  console.log("this is imagelink " + imageLink);
   //make new post and save
   const post = new Post({
-    author: req.body.author,
+    author: req.body.author.username,
     imageUrl: imageLink,
     uploadDate: req.body.uploadedAt,
   });
-  post.save();
+  try {
+    await post.save();
+  } catch(error) {
+    console.log(error);
+  }
   console.log("New post created");
   return res.status(201).json("New post created");
 })
@@ -44,37 +49,12 @@ const handleImage = async (file, fileName) => {
     console.log(error);
     return 'error';
   })
-
   try {
     const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
     return result.url;
   } catch(error) {
     console.log(error);
   }
-  
-  // cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal",(error, result) => {
-  //   if(error) {
-  //     console.log(error);
-  //     return 'error';
-  //   }
-  //   console.log(result.url);
-  //   return result.url;
-  // });
-
-
-  
-  // let data = new FormData();
-  // data.append('file', file.data);
-  // data.append('upload_preset', 'imagepal');
-  // const url = process.env.IMAGE_STORAGE_URL;
-  // const res = await fetch(url, {
-  //   method: 'POST',
-  //   body: data,
-  // })
-  // const resData = await res.json();
-  // console.log('this is resData');
-  // console.log(resData);
-  // return resData
 }
 
 module.exports = router;

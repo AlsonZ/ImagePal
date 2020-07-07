@@ -8,12 +8,21 @@ const NewPost = (props) => {
   const [user, setUser] = useContext(UserContext);
   const [fileName, setFileName] = useState("Choose File");
   const [inputFile, setInputFile] = useState('');
+  const [compressedFile, setCompressedFile] = useState('');
   const [image, setImage] = useState('');
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
       setFileName(e.target.files[0].name);
       setInputFile(e.target.files[0]);
+    }
+  }
+  const showImagePreview = (compressedFile) => {
+    console.log('test if runs');
+    let oFReader = new FileReader();
+    oFReader.readAsDataURL(compressedFile);
+    oFReader.onload = (oFREvent) => {
+      setImage(oFREvent.target.result);
     }
   }
   // move this into handle image change so it is a preview? as right now its on update
@@ -27,11 +36,8 @@ const NewPost = (props) => {
     try {
       const cFile = await imageCompression(inputFile, options);
       console.log(`new file size ${cFile.size/1024/1024}`);
-      let oFReader = new FileReader();
-      oFReader.readAsDataURL(cFile);
-      oFReader.onload = (oFREvent) => {
-        setImage(oFREvent.target.result);
-      }
+      showImagePreview(cFile);
+      setCompressedFile(cFile);
       return cFile;
     } catch (error) {
       console.log(error);
@@ -40,7 +46,8 @@ const NewPost = (props) => {
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
-    let file = await compressImage();
+    let file = compressedFile ? compressedFile : await compressImage();
+    // let file = await compressImage();
     console.log(file.name);
     if(file.size > inputFile.size) {
       file = inputFile;
@@ -59,6 +66,12 @@ const NewPost = (props) => {
     console.log(resData);
   }
 
+  const handlePreview = async (e) => {
+    e.preventDefault();
+    const file = compressedFile ? compressedFile : await compressImage();
+    // await compressImage();    
+  }
+
   
 
   return (
@@ -72,7 +85,10 @@ const NewPost = (props) => {
             <span className="browse">Browse</span>
             <input type="file" accept="image/*" className="file-input" onChange={handleImageChange}/>
           </label>
-          <input type="submit" className="button" value="Upload" onClick={handleImageUpload}/>
+          <div className="button-parent">
+            <input type="submit" className="button" value="Upload" onClick={handleImageUpload}/>
+            <input type="submit" className="button" value="Preview" onClick={handlePreview}/>
+          </div>
         </form>
         <div className="img-parent">
           <img src={image}/>

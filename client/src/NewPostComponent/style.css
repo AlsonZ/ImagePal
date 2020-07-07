@@ -54,19 +54,33 @@
   right: 100%;
   bottom: 100%;
 }
-.new-post form .button {
+.new-post form .button-parent {
+  display: flex;
+  flex-direction: row;
+}
+.new-post form .button-parent .button:nth-child(2) {
+  background-color: var(--dark-highlight-colour);
+}
+.new-post form .button-parent .button {
   background-color: var(--base-colour);
   color: white;
   font-size: 1.3rem;
   padding: 0.6rem;
   margin: 1rem;
+  margin-top: 0.5rem;
   border: 1px solid #ccc;
   cursor: pointer;
   border-radius: 4px;
+  width: 50%;
 }
 
 .new-post .img-parent {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.new-post .img-parent img {
+  max-width: 95%;
+  max-height: 95%;
 }
