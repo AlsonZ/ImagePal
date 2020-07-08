@@ -10,21 +10,21 @@ const Frontpage = () => {
   const [posts, setPosts] = useContext(PostsContext);
   const [user] = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [sort, setSort] = useState('new-sort');
+
+  const fetchData = async () => {
+    let res = await fetch(`/API/posts/frontpage/${sort}/10`);
+    if(res.status === 200) {
+      const resData = await res.json();
+      console.log(resData);
+      setPosts(resData);
+    }
+  }
 
   useEffect(() => {
-    const fetchData = async () => {
-      let res = await fetch('/API/posts/frontpage/10');
-      if(res.status === 200) {
-        const resData = await res.json();
-        console.log(resData);
-        setPosts(resData);
-      }
-    }
     fetchData();
   },[])
-  useEffect(() => {
-    //update state with posts?
-  },[posts])
+
   useEffect(() => {
     if(user.email !== "") {
       setIsLoggedIn(true);
@@ -33,32 +33,14 @@ const Frontpage = () => {
     }
   },[user])
 
-  const postdata1 = {
-    username: "bob",
-    image: "/images/bio.jpg",
-    height: "320px",
-    width: "600px",
-    date: "Sun Jun 28 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
+  const setSorting = (type) => {
+    setSort(type);
+    fetchData();
   }
-  const postdata2 = {
-    username: "bob",
-    image: "/images/chem.jpg",
-    height: "320px",
-    width: "600px",
-    date: "Sun Jun 29 2020 03:23:43 GMT+1000 (Australian Eastern Standard Time)",
-  }
-  const postdata3 = {
-    username: "bob",
-    image: "/images/chem.jpg",
-    height: "320px",
-    width: "600px",
-    date: Date(),
-  }
-  const postData = [postdata1, postdata2,postdata1, postdata2,];
 
   const loadPosts = () => {
     return(posts.map((post) => 
-      <Post post={post}/>
+      <Post key={post._id} post={post}/>
     ))
   }
 
@@ -74,8 +56,8 @@ const Frontpage = () => {
       <div className="frontpage">
         <div className="sorting-parent">
           <div className="sorting">
-            <span className="button">New</span>
-            <span className="button">Top</span>
+            <span className={`button ${sort==='new-sort' ? sort:''}`} onClick={()=>{setSorting('new-sort')}}>New</span>
+            <span className={`button ${sort==='top-sort' ? sort:''}`} onClick={()=>{setSorting('top-sort')}}>Top</span>
           </div>
         </div>
         <div className="posts-parent">

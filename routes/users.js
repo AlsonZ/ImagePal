@@ -10,7 +10,7 @@ router.get('/checkLoggedIn', async (req, res) => {
   //get user and return details
   const user = await checkElement('user_token', userID);
   if(!user) {
-    return res.status(500).json('error');
+    return res.status(401).json('not logged in');
   }
   console.log(userID, user.email, user.username);
   const userData = {

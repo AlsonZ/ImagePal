@@ -23,7 +23,12 @@ const userSchema = new mongoose.Schema({
   },
   user_token: {
     type: String,
-  }
+  },
+  posts: [
+    {
+      type: String
+    }
+  ]
 })
 // first argument is singular name of collection -> auto convert to plural
 module.exports = mongoose.model('User', userSchema)

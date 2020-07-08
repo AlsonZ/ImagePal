@@ -71,18 +71,21 @@
   user-select: none;
   cursor: pointer;
   font-size: 0.8rem;
-  border: 1.6px solid var(--dark-highlight-colour);
+  
   border-radius: 5rem;
-  background-color: rgb(247, 247, 247);
   color: var(--dark-highlight-colour);
   margin: 0.6rem 1rem;
   display: inline-block;
 }
 .frontpage .button:hover {
-  filter: brightness(110%);
+  background-color: rgb(247, 247, 247);
+  color: var(--highlight-colour);
 }
 .frontpage .button:active {
   filter: brightness(90%);
+}
+.frontpage .new-sort, .frontpage .top-sort {
+  border: 1.6px solid var(--dark-highlight-colour);
 }
 
 .overlay {
@@ -104,6 +107,7 @@
   line-height: 3.2rem;
   cursor: pointer;
   user-select: none;
+  z-index: 2;
 }
 .overlay .upload-button:hover {
   filter: brightness(110%);

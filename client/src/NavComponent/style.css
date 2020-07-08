@@ -8,6 +8,7 @@ nav {
   top: 0;
   left: 0;
   animation: fadeIn 1s;
+  z-index: 2;
 }
 nav ul {
   font-size: 2.5rem;

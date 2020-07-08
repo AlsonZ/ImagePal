@@ -7,30 +7,34 @@ cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME, 
 });
 
-router.get('/frontpage/:amount', async (req,res) => {
+const checkLoggedIn = (req, res, next) => {
+  if (req.session.userID) {
+    next();
+  } else {
+    res.status(401).json('Login is required');
+  }
+}
+
+router.get('/frontpage/:sortType/:amount', async (req,res) => {
   const end = req.params.amount;
   const start = end-10;
+  let sortType = req.params.sortType === 'top-sort' ? 'score' : 'uploadDate';
   //send array of 10 images to front
-  const orderedPosts = await Post.find(null,null,{sort: {uploadDate: 1}});
+  const orderedPosts = await Post.find(null,null,{sort: {[sortType]: 1}});
   orderedPosts.map((post) => {
     console.log("ordered "+post.uploadDate)
   })
   const data = orderedPosts.slice(start, end);
-  // console.log(orderedPosts);
   res.status(200).json(data);
 });
 
-
-// need to add checkLogin here as middleware
-router.post('/upload', async (req, res) => {
+router.post('/upload', checkLoggedIn, async (req, res) => {
   //get new uploaded post
   if(!req.files) {
     console.log('no file');
     return res.status(400).json('no file');
   }
   const file = req.files.file;
-  // console.log('this is the file');
-  // console.log(file);
   //upload image to cloudinary for storage
   const imageLink = await handleImage(file, req.body.fileName);
   if(imageLink === 'error') {
@@ -65,5 +69,7 @@ const handleImage = async (file, fileName) => {
     console.log(error);
   }
 }
+
+
 
 module.exports = router;
