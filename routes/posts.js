@@ -42,18 +42,34 @@ router.post('/upload', checkLoggedIn, async (req, res) => {
   }
   console.log("this is imagelink " + imageLink);
   //make new post and save
+  console.log(req.body);
+  console.log(req.body.author);
   const post = new Post({
-    author: req.body.author.username,
+    author: req.body.author,
     imageUrl: imageLink,
     uploadDate: req.body.uploadedAt,
   });
+  console.log(post);
   try {
     await post.save();
   } catch(error) {
-    console.log(error);
+    console.log('upload', error);
   }
   console.log("New post created");
   return res.status(201).json("New post created");
+})
+
+router.post('/updateEmoji', async (req, res) => {
+  // console.log(req.body.post);
+  console.log(req.body);
+  // const post = Post.findOne(req.body.post._id);
+  // console.log(post);
+
+  try {
+  } catch (error) {
+    console.log("updateEmoji", error);
+  }
+
 })
 
 const handleImage = async (file, fileName) => {
@@ -63,8 +79,9 @@ const handleImage = async (file, fileName) => {
     return 'error';
   })
   try {
-    const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
-    return result.url;
+    // const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
+    // return result.url;
+    return './images/bio.jpg'
   } catch(error) {
     console.log(error);
   }

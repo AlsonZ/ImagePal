@@ -1,8 +1,9 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext, useEffect } from 'react';
+import { UserContext } from '../Contexts/UserContext';
 import './style.css';
 
-const Post = (props) => {
-
+const Post = ({post}) => {
+  const [user] = useContext(UserContext);
   const initialState = {
     love: '',
     happy: '',
@@ -10,30 +11,47 @@ const Post = (props) => {
     angry: '',
     evil: '',
   }
-  const handleEmojis = (state, {emoji}) => {;
-    switch (emoji) {
-      case 'love': {
-        const newState = state.love === 'active' ? '' : 'active'
-        return({...initialState, love: newState});
-      }
-      case 'happy': {
-        const newState = state.happy === 'active' ? '' : 'active'
-        return({...initialState, happy: newState});
-      }
-      case 'sad': {
-        const newState = state.sad === 'active' ? '' : 'active'
-        return({...initialState, sad: newState});
-      }
-      case 'angry': {
-        const newState = state.angry === 'active' ? '' : 'active'
-        return({...initialState, angry: newState});
-      }
-      case 'evil': {
-        const newState = state.evil === 'active' ? '' : 'active'
-        return({...initialState, evil: newState});
-      }
-
+  useEffect(() => {
+    //load state from post
+    // if(post.reactions[user.username]) {
+    //   initialState[post.reactions[user.username]] = 'active';
+    // }
+  },[])
+  // useEffect(() => {
+  //   console.log(post.reactions);
+  // },[post.reactions])
+  const updatePost = async(post) => {
+    console.log(post);
+    let url = '/API/posts/updateEmoji';
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(post)
+    });
+    if(res.status === 200) {
+      const resData = await res.json();
+      console.log(resData);
+      return true;
+    } else {
+      //error?
+      return false;
     }
+  }
+  const handleEmojis = (state, {emoji}) => {
+    let newState;
+    if(state[emoji] === 'active') {
+      // post.reactions[user.username] = emoji;
+      // post.score +=1;
+      //remove from array
+      newState = '';
+    } else {
+      // check if array has user, change reaction or add to array
+      newState = 'active';
+    }
+    //update backend about post changes
+    // const result = await updatePost(post);
+    // return( result ? {...initialState, [emoji]: newState} : initialState);
+    return({...initialState, [emoji]: newState});
   }
   const [state, dispatch] = useReducer(handleEmojis, initialState)
   
@@ -41,11 +59,11 @@ const Post = (props) => {
   return (
     <div className="post">
       <div className="user">
-        Posted by {props.post.author}
+        Posted by {post.author}
       </div>
       <div className="image">
         {/* {props.post.image} */}
-        <img src={props.post.imageUrl} height={props.post.height} width={props.post.width}/>
+        <img src={post.imageUrl} height={post.height} width={post.width}/>
       </div>
       <ul className="emojis">
         <li className={state.love} onClick={()=>{dispatch({emoji: 'love'})}}>😍</li>

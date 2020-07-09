@@ -18,21 +18,7 @@ const postSchema = new mongoose.Schema({
     default: 0
   },
   reactions: {
-    love: [{
-      type: String,
-    }],
-    happy: [{
-      type: String,
-    }],
-    sad: [{
-      type: String,
-    }],
-    angry: [{
-      type: String,
-    }],
-    evil: [{
-      type: String,
-    }],
+    type: mongoose.Schema.Types.Mixed,
   },
   comments: [{
     _id: {
