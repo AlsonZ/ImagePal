@@ -11,6 +11,7 @@ const Post = ({post}) => {
     angry: '',
     evil: '',
   }
+  const [emojis, setEmojis] = useState(initialState);
   const checkLoggedIn = () => {
     if(user.username && user.email) {
       return true;
@@ -19,14 +20,11 @@ const Post = ({post}) => {
     }
   }
   useEffect(() => {
-    // load state from post
+    // load reaction from post
     if(post.reactions && post.reactions[user.username]) {
-      initialState[post.reactions[user.username]] = 'active';
+      setEmojis({[post.reactions[user.username]]: 'active'});
     }
   },[])
-  // useEffect(() => {
-  //   console.log(post.reactions);
-  // },[post.reactions])
   const updatePost = async(post) => {
     console.log(post);
     let url = '/API/posts/updateEmoji';
@@ -38,44 +36,31 @@ const Post = ({post}) => {
     if(res.status === 200) {
       const resData = await res.json();
       console.log(resData);
+      post = resData;
       return true;
     } else {
-      //error?
       return false;
     }
   }
   const handleEmojis = async ({emoji}) => {
     if(checkLoggedIn()) {
       let newState;
-      if(emojis[emoji] === 'active') {
-        // remove reaction 
+      if(emojis[emoji] === 'active') { // remove reaction
         delete post.reactions[user.username]
-        // post.reactions[user.username] = emoji;
         post.score -=1;
-        //remove from array
         newState = '';
-      } else {
-        // check if array has user, change reaction or add to array
-        if(!post.reactions) {
-          // reactions object does not exist
-          // no pre-existing reactions from user
+      } else { // add or change reaction
+        if(!post.reactions) { // reactions object does not exist
           post = {
             ...post, 
-            reactions: {
-              [user.username] : emoji,
-            }
+            reactions: {[user.username] : emoji}
           }
           post.score +=1;
-        } else {
-          // reactions object exists
-          // change this into ternary operator
-          if(post.reactions[user.username]) {
-            // previous reaction exists from user
-          } else {
-            // no previous reaction from user
-            post.score +=1;
-          }
+        } else { 
+          // if user reaction exists, do not add to score
+          // as it is just changing emoji reaction
           post.reactions[user.username] = emoji;
+          post.score += post.reactions[user.username] ? 0 : 1
         }
         newState = 'active';
       }
@@ -94,19 +79,12 @@ const Post = ({post}) => {
 
   }
 
-  // need to have a check for intial state to change if current user is in array
-  const [emojis, setEmojis] = useState(initialState);
-
-  
-  
-
   return (
     <div className="post">
       <div className="user">
         Posted by {post.author}
       </div>
       <div className="image">
-        {/* {props.post.image} */}
         <img src={post.imageUrl} height={post.height} width={post.width}/>
       </div>
       <ul className="emojis">
@@ -115,7 +93,6 @@ const Post = ({post}) => {
         <li className={emojis.sad} onClick={()=>{handleEmojis({emoji: 'sad'})}}>😢</li>
         <li className={emojis.angry} onClick={()=>{handleEmojis({emoji: 'angry'})}}>😡</li>
         <li className={emojis.evil} onClick={()=>{handleEmojis({emoji: 'evil'})}}>😈</li>
-        {/*emoji's go here, mabe pass in the array from the posts props to give number of reactions?*/}
       </ul>
     </div>
   );

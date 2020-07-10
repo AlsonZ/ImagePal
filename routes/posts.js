@@ -60,12 +60,8 @@ router.post('/upload', checkLoggedIn, async (req, res) => {
 })
 
 router.post('/updateEmoji', async (req, res) => {
-  // console.log(req.body.post);
-  console.log(req.body);
-  // const post = await Post.findOne({_id: req.body._id});
   try {
     const post = await Post.findOneAndUpdate(req.body._id, req.body, {new: true});
-    console.log(post);
     res.status(200).json(post);
   } catch (error) {
     console.log('updateEmoji: ', error);
