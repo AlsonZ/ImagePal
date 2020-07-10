@@ -21,6 +21,7 @@ router.get('/frontpage/:sortType/:amount', async (req,res) => {
   let sortType = req.params.sortType === 'top-sort' ? 'score' : 'uploadDate';
   //send array of 10 images to front
   const orderedPosts = await Post.find(null,null,{sort: {[sortType]: 1}});
+  // console.log(req.params.sortType);
   // orderedPosts.map((post) => {
   //   console.log("ordered "+post.uploadDate)
   // })

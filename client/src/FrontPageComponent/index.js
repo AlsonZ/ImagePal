@@ -12,8 +12,8 @@ const Frontpage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [sort, setSort] = useState('new-sort');
 
-  const fetchData = async () => {
-    let res = await fetch(`/API/posts/frontpage/${sort}/10`);
+  const fetchData = async (sortType) => {
+    let res = await fetch(`/API/posts/frontpage/${sortType}/10`);
     if(res.status === 200) {
       const resData = await res.json();
       console.log(resData);
@@ -33,9 +33,9 @@ const Frontpage = () => {
     }
   },[user])
 
-  const setSorting = (type) => {
-    setSort(type);
-    fetchData();
+  const setSorting = (sortType) => {
+    setSort(sortType);
+    fetchData(sortType);
   }
 
   const loadPosts = () => {
