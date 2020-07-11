@@ -1,0 +1,16 @@
+.postpage {
+  max-width: 100%;
+  width: 65rem;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 5.5rem 10fr;
+  grid-template-areas: "posts sidebar";
+  animation: fadeIn 1s;
+}
+
+.postpage .sidebar {
+  grid-area: sidebar;
+}

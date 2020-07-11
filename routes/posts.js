@@ -28,7 +28,22 @@ router.get('/frontpage/:sortType/:amount', async (req,res) => {
   const data = orderedPosts.slice(start, end);
   res.status(200).json(data);
 });
-
+router.get('/post/:id', async (req,res) => {
+  const id = req.params.id;
+  try {
+    const post = await Post.findById(id);
+    // console.log('post', post);
+    if(post) {
+      res.status(200).json(post);
+    } else {
+      res.status(404).json('');
+    }
+  } catch (error) {
+    console.log('post', error);
+    //post does not exist
+    res.status(404);
+  }
+});
 router.post('/upload', checkLoggedIn, async (req, res) => {
   //get new uploaded post
   if(!req.files) {
@@ -58,8 +73,10 @@ router.post('/upload', checkLoggedIn, async (req, res) => {
   }
   console.log("New post created");
   return res.status(201).json("New post created");
-})
+});
 
+//change this to only accept key and string and check current user to match key
+// to prevent fraudulent posts
 router.post('/updateEmoji', async (req, res) => {
   try {
     const post = await Post.findOneAndUpdate(req.body._id, req.body, {new: true});
@@ -67,7 +84,7 @@ router.post('/updateEmoji', async (req, res) => {
   } catch (error) {
     console.log('updateEmoji: ', error);
   }
-})
+});
 
 const handleImage = async (file, fileName) => {
   const filepath = `./images/${fileName}`;

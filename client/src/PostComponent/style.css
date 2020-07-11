@@ -35,12 +35,11 @@
   color: grey;
   filter: grayscale(1);
 }
-.post .emojis .active {
+.post .emojis .active, .post .emojis li:hover {
   color: var(--base-colour);
   font-weight: bold;
   filter: grayscale(0);
 }
-
 
 .post .user {
   color: grey;

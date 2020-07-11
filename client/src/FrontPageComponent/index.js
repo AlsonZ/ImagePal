@@ -40,7 +40,15 @@ const Frontpage = () => {
 
   const loadPosts = () => {
     return(posts.map((post) => 
-      <Post key={post._id} post={post}/>
+      <Link 
+        to={{
+          pathname: `/Post/${post._id}`,
+          post: post,
+        }} 
+        className="postLink"
+      >
+        <Post key={post._id} post={post}/>
+      </Link>
     ))
   }
 
