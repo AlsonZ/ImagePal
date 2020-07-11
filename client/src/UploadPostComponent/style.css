@@ -1,4 +1,4 @@
-.new-post-parent {
+.upload-post-parent {
   width: 65rem;
   height: 100%;
   max-width: 100%;
@@ -10,7 +10,7 @@
   animation: fadeIn 1s;
 }
 
-.new-post {
+.upload-post {
   width: 95%;
   min-height: 95%;
   margin-bottom: 1rem;
@@ -18,18 +18,18 @@
   background-color: white;
 }
 
-.new-post h1 {
+.upload-post h1 {
   font-weight: normal;
   text-align: center;
   color: var(--dark-highlight-colour);
 }
 
-.new-post form {
+.upload-post form {
   display: flex;
   flex-direction: column;
 }
 
-.new-post form .custom-file-input {
+.upload-post form .custom-file-input {
   border: 1px solid #ccc;
   display: inline-block;
   /* padding: 0.6rem; */
@@ -39,29 +39,29 @@
   font-size: 1.1rem;
   border-radius: 3px;
 }
-.new-post form .custom-file-input .file-name {
+.upload-post form .custom-file-input .file-name {
   float: left;
   text-align: center;
   padding: 0.6rem;
 }
-.new-post form .custom-file-input .browse {
+.upload-post form .custom-file-input .browse {
   background-color: lightgrey;
   float: right;
   padding: 0.6rem;
 }
-.new-post form .file-input {
+.upload-post form .file-input {
   position: fixed;
   right: 100%;
   bottom: 100%;
 }
-.new-post form .button-parent {
+.upload-post form .button-parent {
   display: flex;
   flex-direction: row;
 }
-.new-post form .button-parent .button:nth-child(2) {
+.upload-post form .button-parent .button:nth-child(2) {
   background-color: var(--dark-highlight-colour);
 }
-.new-post form .button-parent .button {
+.upload-post form .button-parent .button {
   background-color: var(--base-colour);
   color: white;
   font-size: 1.3rem;
@@ -74,13 +74,13 @@
   width: 50%;
 }
 
-.new-post .img-parent {
+.upload-post .img-parent {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.new-post .img-parent img {
+.upload-post .img-parent img {
   max-width: 95%;
   max-height: 95%;
 }

@@ -14,3 +14,40 @@
 .postpage .sidebar {
   grid-area: sidebar;
 }
+.postpage .sidebar-box {
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid lightgrey;
+  margin: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  user-select: none;
+}
+.postpage .sidebar-box h1 {
+  background-color: var(--dark-highlight-colour);
+  color: white;
+  font-size: 1.3rem;
+  font-weight: normal;
+  padding: 0.5rem;
+  border-radius: 3px;
+  margin: 0;
+}
+.postpage .sidebar-box .link {
+  margin: 0;
+  padding: 0.6rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  color: var(--dark-highlight-colour);
+}
+.postpage .sidebar-box .link:hover {
+  background-color: lightgrey;
+}
+
+.postpage .postparent {
+  grid-area: posts;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

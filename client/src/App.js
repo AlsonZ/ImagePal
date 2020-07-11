@@ -6,7 +6,7 @@ import Frontpage from './FrontPageComponent';
 import Login from './EntryComponent/LoginComponent.js';
 import Register from './EntryComponent/RegisterComponent.js';
 import Profile from './ProfileComponent';
-import Post from './PostComponent';
+import EditPost from './EditPostComponent';
 import PostPage from './PostPageComponent';
 import NewPost from './NewPostComponent';
 import {UserProvider} from './Contexts/UserContext';
@@ -25,8 +25,8 @@ function App() {
                 <Route exact path="/Login" component={Login}/>  
                 <Route exact path="/Register" component={Register}/>  
                 <Route exact path="/Profile" component={Profile}/>  
-                {/* <Route exact path="/Post/:id" render={(props) => <PostPage {...props} />}/>   */}
                 <Route exact path="/Post/:id" component={PostPage}/>  
+                <Route exact path="/EditPost/:id" component={EditPost}/>  
                 <Route exact path="/NewPost" component={NewPost}/>  
               </div>
             </Router>

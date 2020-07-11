@@ -44,7 +44,7 @@ router.get('/post/:id', async (req,res) => {
     res.status(404);
   }
 });
-router.post('/upload', checkLoggedIn, async (req, res) => {
+router.post('/newpost', checkLoggedIn, async (req, res) => {
   //get new uploaded post
   if(!req.files) {
     console.log('no file');
