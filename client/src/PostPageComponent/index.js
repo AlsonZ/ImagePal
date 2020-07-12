@@ -30,7 +30,11 @@ const PostPage = (props) => {
     // cannot edit if there is reactions or comments
     if(post.comments && post.comments.length <= 0 && !post.reactions) {
       // go to edit post page, same as new post page
-      return(`/editpost/${post._id}`)
+      // return(`/editpost/${post._id}`)
+      return({
+        pathname: `/editpost/${post._id}`,
+        postID: post._id
+      })
     } else {
       return(`/Post/${post._id}`)
     }

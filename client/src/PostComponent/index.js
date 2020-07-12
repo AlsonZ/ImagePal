@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../Contexts/UserContext';
 import './style.css';
 
@@ -25,13 +26,13 @@ const Post = ({post}) => {
       setEmojis({[post.reactions[user.username]]: 'active'});
     }
   },[])
-  const updatePost = async(post) => {
-    console.log(post);
+  const updatePost = async(data) => {
+    console.log(data);
     let url = '/API/posts/updateEmoji';
     const res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(post)
+      body: JSON.stringify(data)
     });
     if(res.status === 200) {
       const resData = await res.json();
@@ -45,27 +46,32 @@ const Post = ({post}) => {
   const handleEmojis = async ({emoji}) => {
     if(checkLoggedIn()) {
       let newState;
+      let reaction;
       if(emojis[emoji] === 'active') { // remove reaction
-        delete post.reactions[user.username]
-        post.score -=1;
+          // delete post.reactions[user.username]
+          // post.score -=1;
         newState = '';
+        // call on delete reaction route, provide user to remove
+        reaction = {[user.username]: ''}; 
       } else { // add or change reaction
-        if(!post.reactions) { // reactions object does not exist
-          post = {
-            ...post, 
-            reactions: {[user.username] : emoji}
-          }
-          post.score +=1;
-        } else { 
+        // if(!post.reactions) { // reactions object does not exist
+          // post = {
+          //   ...post, 
+          //   reactions: {[user.username] : emoji}
+          // }
+          // post.score +=1;
+          
+        // } else { 
           // if user reaction exists, do not add to score
           // as it is just changing emoji reaction
-          post.reactions[user.username] = emoji;
-          post.score += post.reactions[user.username] ? 0 : 1
-        }
+          // post.reactions[user.username] = emoji;
+          // post.score += post.reactions[user.username] ? 0 : 1
+        // }
+        reaction = {[user.username]: emoji}; 
         newState = 'active';
       }
       //update backend about post changes
-      const updated = await updatePost(post);
+      const updated = await updatePost({_id: post._id, reaction: reaction});
       if(updated) {
         setEmojis({...initialState, [emoji]: newState});
       } else {
@@ -81,12 +87,21 @@ const Post = ({post}) => {
 
   return (
     <div className="post">
+      <Link 
+        key={post._id}
+        to={{
+          pathname: `/Post/${post._id}`,
+          post: post,
+        }} 
+        className="postLink"
+      >
       <div className="user">
         Posted by {post.author}
       </div>
       <div className="image">
         <img src={post.imageUrl} height={post.height} width={post.width}/>
       </div>
+      </Link>
       <ul className="emojis">
         <li className={emojis.love} onClick={()=>{handleEmojis({emoji: 'love'})}}>😍</li>
         <li className={emojis.happy} onClick={()=>{handleEmojis({emoji: 'happy'})}}>😊</li>

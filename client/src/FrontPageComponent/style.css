@@ -120,10 +120,6 @@
   text-decoration: none;
 }
 
-.frontpage .postLink {
-  text-decoration: none;
-}
-
 @media only screen and (max-width: 65rem) {
   .frontpage {
     grid-template-columns: 1fr;

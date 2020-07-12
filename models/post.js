@@ -9,6 +9,9 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
+  lastEditDate: {
+    type: Date,
+  },
   imageUrl: {
     type: String,
     required: true

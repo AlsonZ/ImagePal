@@ -14,6 +14,7 @@ const UploadPost = (props) => {
   const url = props.url;
   // const url = '/API/posts/upload';
   const postID = props.postID ? props.postID : '';
+  const commentID = props.commentID ? props.commentID : '';
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -59,6 +60,7 @@ const UploadPost = (props) => {
     data.append('fileName', file.name);
     data.append('author', user.username);
     data.append('postID', postID);
+    data.append('commentID', commentID);
     data.append('uploadedAt', Date());
     
     const res = await fetch(url, {

@@ -90,7 +90,7 @@ async function checkElement(elementName, element) {
   try {
     [user] = await User.find({[elementName]: element});
     if (user !== undefined) {
-      //user with email exists
+      //user with element exists
       return user;
     } else {
       return false;
