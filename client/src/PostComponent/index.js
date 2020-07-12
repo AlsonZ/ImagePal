@@ -52,7 +52,7 @@ const Post = ({post}) => {
           // post.score -=1;
         newState = '';
         // call on delete reaction route, provide user to remove
-        reaction = {[user.username]: ''}; 
+        reaction =  '' 
       } else { // add or change reaction
         // if(!post.reactions) { // reactions object does not exist
           // post = {
@@ -67,12 +67,14 @@ const Post = ({post}) => {
           // post.reactions[user.username] = emoji;
           // post.score += post.reactions[user.username] ? 0 : 1
         // }
-        reaction = {[user.username]: emoji}; 
+        reaction = emoji;
         newState = 'active';
       }
       //update backend about post changes
       const updated = await updatePost({_id: post._id, reaction: reaction});
+      console.log(updated);
       if(updated) {
+        console.log('inside updated runs')
         setEmojis({...initialState, [emoji]: newState});
       } else {
         //error

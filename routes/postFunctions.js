@@ -45,11 +45,18 @@ const checkFile = (req, res, next) => {
 const checkCorrectReactor = async (req, res, next) => {
   // get user, get post to update
   // compare user.username to key in the object
+  // if user.username does not exist, means it is a new reaction
   const [user] = await User.find({user_token: req.session.userID});
   const post = await Post.findById(req.body._id);
-  console.log(user);
-  console.log(post);
-
+  // if(post.reactions[user.username]) {
+  if(post.reactions && post.reactions.hasOwnProperty(user.username)) {
+    req.newReaction = false;
+  } else {
+    req.newReaction = true;
+  }
+  req.user = user;
+  req.post = post;
+  next();
 }
 
 module.exports.checkFile = checkFile;

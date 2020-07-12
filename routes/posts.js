@@ -85,7 +85,28 @@ router.post('/updateEmoji', checkLoggedIn, checkCorrectReactor, async (req, res)
     // replaces entire post which isnt so good
     // const post = await Post.findOneAndUpdate(req.body._id, req.body, {new: true});
     // res.status(200).json(post);
-    
+    // if(req.newReaction) {
+      try {
+        const post = await Post.findByIdAndUpdate(req.body._id, 
+          { 
+            reactions: {
+              ...req.post.reactions,
+              [req.user.username]: req.body.reaction
+            },
+            // $set: {
+            //   [req.user.username]: req.body.reaction
+            // },
+            score: req.newReaction ? 1 : 0
+          }, 
+            {new:true,upsert:true}
+        );
+        res.status(200).json(post);
+      } catch(error) {
+        console.log('updateEmoji: ', error);
+      }
+    // } else {
+    //   //old reaction, update the old one
+    // }
   } catch (error) {
     console.log('updateEmoji: ', error);
   }
