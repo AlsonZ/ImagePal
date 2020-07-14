@@ -91,18 +91,17 @@ router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction
           $unset : {[reactionsDotNotation]: ''},
           $inc: {score: -1}
         }, 
-          {new:true,upsert:true}
+          {new:true}
       );
     } else {
+      // same for $set 
+      const reactionsDotNotation = `reactions.${req.user.username}`
       post = await Post.findByIdAndUpdate(req.body._id, 
         { 
-          reactions: {
-            ...req.post.reactions,
-            [req.user.username]: req.body.reaction
-          },
+          $set: {[reactionsDotNotation]: req.body.reaction},
           $inc: {score: req.newReaction ? 1 : 0}
         }, 
-          {new:true,upsert:true}
+          {new:true}
       );
     }
     res.status(200).json(post);
