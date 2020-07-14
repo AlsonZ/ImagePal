@@ -1,7 +1,9 @@
 const express = require('express');
 const cloudinary = require('cloudinary');
 const Post = require('../models/post');
-const { checkLoggedIn, checkCorrectAuthor, checkFile, checkEditAllowed, checkCorrectReactor } = require('./postFunctions');
+const { checkLoggedIn, checkCorrectAuthor, checkFile, checkEditAllowed, 
+  checkNewReaction, checkDeleteReaction } = require('./postFunctions');
+const user = require('../models/user');
 const router = express.Router();
 
 cloudinary.config({ 
@@ -78,36 +80,33 @@ router.post('/editpost', checkLoggedIn, checkCorrectAuthor,
   }
 })
 
-//change this to only accept key and string and check current user to match key
-// to prevent fraudulent posts
-router.post('/updateEmoji', checkLoggedIn, checkCorrectReactor, async (req, res) => {
+router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction, async (req, res) => {
   try {
-    // replaces entire post which isnt so good
-    // const post = await Post.findOneAndUpdate(req.body._id, req.body, {new: true});
-    // res.status(200).json(post);
-    // if(req.newReaction) {
-      try {
-        const post = await Post.findByIdAndUpdate(req.body._id, 
-          { 
-            reactions: {
-              ...req.post.reactions,
-              [req.user.username]: req.body.reaction
-            },
-            // $set: {
-            //   [req.user.username]: req.body.reaction
-            // },
-            score: req.newReaction ? 1 : 0
-          }, 
-            {new:true,upsert:true}
-        );
-        res.status(200).json(post);
-      } catch(error) {
-        console.log('updateEmoji: ', error);
-      }
-    // } else {
-    //   //old reaction, update the old one
-    // }
-  } catch (error) {
+    let post;
+    if(req.deleteReaction) {
+      // as mongodb $unset requires dot notation 
+      const reactionsDotNotation = `reactions.${req.user.username}`
+      post = await Post.findByIdAndUpdate(req.body._id, 
+        { 
+          $unset : {[reactionsDotNotation]: ''},
+          $inc: {score: -1}
+        }, 
+          {new:true,upsert:true}
+      );
+    } else {
+      post = await Post.findByIdAndUpdate(req.body._id, 
+        { 
+          reactions: {
+            ...req.post.reactions,
+            [req.user.username]: req.body.reaction
+          },
+          $inc: {score: req.newReaction ? 1 : 0}
+        }, 
+          {new:true,upsert:true}
+      );
+    }
+    res.status(200).json(post);
+  } catch(error) {
     console.log('updateEmoji: ', error);
   }
 });

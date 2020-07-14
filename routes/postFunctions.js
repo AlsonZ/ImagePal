@@ -42,13 +42,12 @@ const checkFile = (req, res, next) => {
   }
 }
 
-const checkCorrectReactor = async (req, res, next) => {
+const checkNewReaction = async (req, res, next) => {
   // get user, get post to update
-  // compare user.username to key in the object
+  // check if user has already reacted
   // if user.username does not exist, means it is a new reaction
   const [user] = await User.find({user_token: req.session.userID});
   const post = await Post.findById(req.body._id);
-  // if(post.reactions[user.username]) {
   if(post.reactions && post.reactions.hasOwnProperty(user.username)) {
     req.newReaction = false;
   } else {
@@ -59,8 +58,19 @@ const checkCorrectReactor = async (req, res, next) => {
   next();
 }
 
+const checkDeleteReaction = async (req, res, next) => {
+  req.deleteReaction = req.body.reaction === '' ? true : false;
+  // if(req.body.reaction === '') {
+  //   req.deleteReaction = true;
+  // } else {
+  //   req.deleteReaction = false;
+  // }
+  next();
+}
+
 module.exports.checkFile = checkFile;
 module.exports.checkEditAllowed = checkEditAllowed;
 module.exports.checkCorrectAuthor = checkCorrectAuthor;
-module.exports.checkCorrectReactor = checkCorrectReactor;
+module.exports.checkNewReaction = checkNewReaction;
+module.exports.checkDeleteReaction = checkDeleteReaction;
 module.exports.checkLoggedIn = checkLoggedIn;

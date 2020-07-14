@@ -20,11 +20,16 @@ const Post = ({post}) => {
       return false;
     }
   }
+  const loadReaction = () => {
+    if(post.reactions && post.reactions[user.username]) {
+      setEmojis({...initialState, [post.reactions[user.username]]: 'active'});
+    } else {
+      setEmojis(initialState)
+    }
+  }
   useEffect(() => {
     // load reaction from post
-    if(post.reactions && post.reactions[user.username]) {
-      setEmojis({[post.reactions[user.username]]: 'active'});
-    }
+    loadReaction();
   },[])
   const updatePost = async(data) => {
     console.log(data);
@@ -54,19 +59,6 @@ const Post = ({post}) => {
         // call on delete reaction route, provide user to remove
         reaction =  '' 
       } else { // add or change reaction
-        // if(!post.reactions) { // reactions object does not exist
-          // post = {
-          //   ...post, 
-          //   reactions: {[user.username] : emoji}
-          // }
-          // post.score +=1;
-          
-        // } else { 
-          // if user reaction exists, do not add to score
-          // as it is just changing emoji reaction
-          // post.reactions[user.username] = emoji;
-          // post.score += post.reactions[user.username] ? 0 : 1
-        // }
         reaction = emoji;
         newState = 'active';
       }
@@ -74,8 +66,9 @@ const Post = ({post}) => {
       const updated = await updatePost({_id: post._id, reaction: reaction});
       console.log(updated);
       if(updated) {
-        console.log('inside updated runs')
-        setEmojis({...initialState, [emoji]: newState});
+        // console.log('inside updated runs')
+        // setEmojis({...initialState, [emoji]: newState});
+        loadReaction();
       } else {
         //error
         console.log('server error');
