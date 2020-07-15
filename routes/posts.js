@@ -2,8 +2,9 @@ const express = require('express');
 const cloudinary = require('cloudinary');
 const Post = require('../models/post');
 const { checkLoggedIn, checkCorrectAuthor, checkFile, checkEditAllowed, 
-  checkNewReaction, checkDeleteReaction } = require('./postFunctions');
+  checkNewReaction, checkDeleteReaction, checkDeleteAllowed } = require('./postFunctions');
 const user = require('../models/user');
+const { findByIdAndDelete } = require('../models/post');
 const router = express.Router();
 
 cloudinary.config({ 
@@ -78,6 +79,17 @@ router.post('/editpost', checkLoggedIn, checkCorrectAuthor,
   } catch (error) {
     console.log('editpost ', error);
   }
+});
+
+router.delete('/deletePost', checkLoggedIn, checkCorrectAuthor, checkDeleteAllowed, async (req, res) => {
+  //delete the post
+  try {
+    post = await Post.findByIdAndDelete(req,body._id);
+    res.status(200).json("successfully deleted")
+  } catch (error) {
+    console.log('delete post: ', error);
+  }
+  
 })
 
 router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction, async (req, res) => {

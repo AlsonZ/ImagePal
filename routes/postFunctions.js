@@ -30,6 +30,9 @@ const checkEditAllowed = (req, res, next) => {
   } else {
     res.status(403).json('post has comments or reactions');
   }
+}
+
+const checkDeleteAllowed = (req, res, next) => {
 
 }
 
@@ -60,16 +63,12 @@ const checkNewReaction = async (req, res, next) => {
 
 const checkDeleteReaction = async (req, res, next) => {
   req.deleteReaction = req.body.reaction === '' ? true : false;
-  // if(req.body.reaction === '') {
-  //   req.deleteReaction = true;
-  // } else {
-  //   req.deleteReaction = false;
-  // }
   next();
 }
 
 module.exports.checkFile = checkFile;
 module.exports.checkEditAllowed = checkEditAllowed;
+module.exports.checkDeleteAllowed = checkDeleteAllowed;
 module.exports.checkCorrectAuthor = checkCorrectAuthor;
 module.exports.checkNewReaction = checkNewReaction;
 module.exports.checkDeleteReaction = checkDeleteReaction;
