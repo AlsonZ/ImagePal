@@ -75,6 +75,31 @@ const checkDeleteReaction = async (req, res, next) => {
   next();
 }
 
+const updatePostFromUser = async (userID, postID) => {
+  try {
+    const user = await User.findOneAndUpdate({user_token: userID}, {
+      $push : {
+        posts : postID
+      }
+    })
+  } catch (error) {
+    console.log('updatePostFromUser: ', error);
+  }
+}
+
+const removePostFromUser = async (userID, postID) => {
+  try {
+    const user = await User.findOneAndUpdate({user_token: userID}, {
+      $pull : {
+        posts: postID
+      }
+    })
+  } catch (error) {
+    console.log('removePostFromUser: ', error)
+  }
+
+}
+
 module.exports.checkFile = checkFile;
 module.exports.checkEditAllowed = checkEditAllowed;
 module.exports.checkDeleteAllowed = checkDeleteAllowed;
@@ -82,3 +107,5 @@ module.exports.checkCorrectAuthor = checkCorrectAuthor;
 module.exports.checkNewReaction = checkNewReaction;
 module.exports.checkDeleteReaction = checkDeleteReaction;
 module.exports.checkLoggedIn = checkLoggedIn;
+module.exports.updatePostFromUser = updatePostFromUser;
+module.exports.removePostFromUser = removePostFromUser;
