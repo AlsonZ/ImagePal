@@ -15,6 +15,7 @@ const UploadPost = (props) => {
   // const url = '/API/posts/upload';
   const postID = props.postID ? props.postID : '';
   const commentID = props.commentID ? props.commentID : '';
+  // const onSuccess = props.onSuccess ? props.onSuccess : ()=>{};
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -69,6 +70,12 @@ const UploadPost = (props) => {
     })
     const resData = await res.json();
     console.log(resData);
+    if(res.status === 200) {
+      props.onSuccessfulEdit();
+    } else if (res.status === 201) {
+      // redirect to post page
+      props.onSuccess(resData);
+    }
   }
 
   const handlePreview = async (e) => {

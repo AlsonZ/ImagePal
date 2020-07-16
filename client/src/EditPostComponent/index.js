@@ -15,11 +15,15 @@ const EditPost = (props) => {
     // redirect to post page if not the user who posted it?
     // dont allow people to link to this page?, mabe require the user?
     // dont allow refreshing the edit page?
-  },[])
+  },[]);
+
+  const onSuccessfulEdit = () => {
+    props.history.push(`/post/${postID}`)
+  }
 
   return(
     <div>
-      <UploadPost url="/API/posts/editpost" postID={postID} title="Edit Post"/>
+      <UploadPost url="/API/posts/editpost" postID={postID} title="Edit Post" onSuccess={onSuccessfulEdit}/>
     </div>
   )
 }

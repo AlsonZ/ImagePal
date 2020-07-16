@@ -55,11 +55,15 @@ router.post('/newpost', checkLoggedIn, checkFile, async (req, res) => {
   });
   // console.log(post);
   try {
-    await post.save();
+    await post.save((error, post) => {
+      if(error) {
+        console.log(error);
+      }
+      return res.status(201).json(post._id);
+    });
   } catch(error) {
     console.log('newpost', error);
   }
-  return res.status(201).json("New post created");
 });
 
 router.post('/editpost', checkLoggedIn, checkCorrectAuthor, 
