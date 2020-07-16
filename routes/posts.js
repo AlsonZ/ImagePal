@@ -81,10 +81,10 @@ router.post('/editpost', checkLoggedIn, checkCorrectAuthor,
   }
 });
 
-router.delete('/deletePost', checkLoggedIn, checkCorrectAuthor, checkDeleteAllowed, async (req, res) => {
+router.delete('/deletepost', checkLoggedIn, checkCorrectAuthor, checkDeleteAllowed, async (req, res) => {
   //delete the post
   try {
-    post = await Post.findByIdAndDelete(req,body._id);
+    post = await Post.findByIdAndDelete(req.body.postID);
     res.status(200).json("successfully deleted")
   } catch (error) {
     console.log('delete post: ', error);

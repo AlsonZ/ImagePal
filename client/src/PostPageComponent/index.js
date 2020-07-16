@@ -29,8 +29,6 @@ const PostPage = (props) => {
   const handleEdit = () => {
     // cannot edit if there is reactions or comments
     if(post.comments && post.comments.length <= 0 && !post.reactions) {
-      // go to edit post page, same as new post page
-      // return(`/editpost/${post._id}`)
       return({
         pathname: `/editpost/${post._id}`,
         postID: post._id
@@ -40,13 +38,25 @@ const PostPage = (props) => {
     }
 
   }
-  const handleDelete = () => {
-    if(post.comments.length > 0) {
-      // cannot delete
-      // can only replace with placeholder
+  const handleDelete = async () => {
+    const url = '/API/posts/deletepost';
+    const data = {
+      postID: post._id,
     }
-    // send api call to delete
-    // when it is deleted redirect to frontpage
+    const res = await fetch(url, {
+      method: 'DELETE',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data),
+    })
+    if(res.status === 200) {
+      // resData = await res.json();
+      //redirect to frontpage
+      props.history.push('/');
+      console.log('this got deleted');
+    } else {
+      const resData = await res.json();
+      console.log(resData);
+    }
   }
 
 
@@ -60,7 +70,7 @@ const PostPage = (props) => {
           <h1>Post Options</h1>
           {/* onClick={()=>{handleEdit()}} */}
           <Link className="link" to={()=>handleEdit()} >Edit Post</Link>
-          <Link className="link" onClick={()=>{handleDelete()}}>Delete Post</Link>
+          <div className="link" onClick={()=>{handleDelete()}}>Delete Post</div>
         </div>
       </div>
     </div>

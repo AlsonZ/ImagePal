@@ -33,7 +33,16 @@ const checkEditAllowed = (req, res, next) => {
 }
 
 const checkDeleteAllowed = (req, res, next) => {
-
+  const post = req.post;
+   if(post.comments && post.comments.length > 0) {
+    // cannot delete
+    req.placeholderRequired = true;
+    next();
+  } else {
+    // does not matter if there are emoji reactions
+    // has no comments and can delete
+    next();
+  }
 }
 
 const checkFile = (req, res, next) => {
