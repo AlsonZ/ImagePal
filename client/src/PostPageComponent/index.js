@@ -69,8 +69,9 @@ const PostPage = (props) => {
         <div className="sidebar-box post-options">
           <h1>Post Options</h1>
           {/* onClick={()=>{handleEdit()}} */}
-          <Link className="link" to={()=>handleEdit()} >Edit Post</Link>
-          <div className="link" onClick={()=>{handleDelete()}}>Delete Post</div>
+          <Link className="button" to={()=>handleEdit()} >Edit Post</Link>
+          <div className="button" onClick={()=>{handleDelete()}}>Delete Post</div>
+          <div className="button" >Comment on Post</div>
         </div>
       </div>
     </div>

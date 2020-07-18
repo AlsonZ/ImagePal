@@ -126,11 +126,19 @@
     grid-template-areas: "sorting "
                          "posts ";
   }
-  .sidebar {
+  .frontpage .sidebar {
     display: none;
   }
   .frontpage .sorting {
     width: 100%;
     margin: 1rem 0;
+  }
+  .frontpage {
+    padding: 0 10%;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .frontpage {
+    padding: 0;
   }
 }

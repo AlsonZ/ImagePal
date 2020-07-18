@@ -16,12 +16,9 @@ router.get('/frontpage/:sortType/:amount', async (req,res) => {
   const end = req.params.amount;
   const start = end-10;
   let sortType = req.params.sortType === 'top-sort' ? 'score' : 'uploadDate';
+  let sortOrder = req.params.sortType === 'top-sort' ? -1 : 1;
   //send array of 10 images to front
-  const orderedPosts = await Post.find(null,null,{sort: {[sortType]: 1}});
-  // console.log(req.params.sortType);
-  // orderedPosts.map((post) => {
-  //   console.log("ordered "+post.uploadDate)
-  // })
+  const orderedPosts = await Post.find(null,null,{sort: {[sortType]: sortOrder}});
   const data = orderedPosts.slice(start, end);
   res.status(200).json(data);
 });
@@ -128,6 +125,14 @@ router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction
     console.log('updateEmoji: ', error);
   }
 });
+
+router.post('/newComment/:postID', async (req, res) => {
+  const post = await Post.findByIdAndUpdate(req.params.postID, {
+    $push : {
+      comments : req.body.comment
+    }
+  },{new: true})
+})
 
 const handleImage = async (file, fileName) => {
   const filepath = `./images/${fileName}`;
