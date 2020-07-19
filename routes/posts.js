@@ -126,15 +126,27 @@ router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction
   }
 });
 
-router.post('/newComment/:postID', async (req, res) => {
-  console.log('this is comment');
-  console.log(req.params.postID);
-  console.log(req.body);
-  // const post = await Post.findByIdAndUpdate(req.params.postID, {
-  //   $push : {
-  //     comments : req.body.comment
-  //   }
-  // },{new: true})
+router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
+  const imageLink = await handleImage(req.files.file, req.body.fileName);
+  if(imageLink === 'error') {
+    return res.status(500);
+  }
+  const comment = {
+    "imageUrl": imageLink,
+    "uploadDate": req.body.uploadedAt,
+    "author": req.body.author
+  }
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.postID, {
+      $push : {
+        comments : comment
+      }
+    },{new: true})
+    res.status(200).json('success');
+  } catch (error) {
+    console.log('New Comment: ', error)
+  }
+  
 })
 
 const handleImage = async (file, fileName) => {

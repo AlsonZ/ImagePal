@@ -34,6 +34,9 @@ const postSchema = new mongoose.Schema({
     imageUrl: {
       type: String,
     },
+    uploadDate: {
+      type: Date,
+    },
     comments: []
   }]
 })
