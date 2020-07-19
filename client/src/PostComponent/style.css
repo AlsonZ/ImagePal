@@ -59,6 +59,10 @@
   text-decoration: none;
 }
 
+.post .isComment li {
+  display: none;
+}
+
 @media only screen and (max-width: 65rem) {
   .post {
     width: 100%;

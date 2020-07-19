@@ -97,7 +97,7 @@ const Post = ({post}) => {
         <img src={post.imageUrl} height={post.height} width={post.width}/>
       </div>
       </Link>
-      <ul className="emojis">
+      <ul className={`emojis ${post.isComment}`}>
         <li className={emojis.love} onClick={()=>{handleEmojis({emoji: 'love'})}}>😍</li>
         <li className={emojis.happy} onClick={()=>{handleEmojis({emoji: 'happy'})}}>😊</li>
         <li className={emojis.sad} onClick={()=>{handleEmojis({emoji: 'sad'})}}>😢</li>

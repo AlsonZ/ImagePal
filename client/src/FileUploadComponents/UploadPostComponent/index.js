@@ -49,9 +49,11 @@ const UploadPost = (props) => {
   const handleImageUpload = async (e) => {
     e.preventDefault();
     let file = compressedFile ? compressedFile : await compressImage();
-    // let file = await compressImage();
-    // console.log(file.name);
-    if(file.size > inputFile.size) {
+    if(!file) {
+      // choose a file error msg goes here
+      return;
+    }
+    if((file.size > inputFile.size)) {
       file = inputFile;
     }
     let data = new FormData();

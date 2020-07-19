@@ -4,10 +4,6 @@ import {UserContext} from '../Contexts/UserContext'
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
   const [user] = useContext(UserContext)
-  useEffect(() => {
-    console.log('inside protected route');
-    console.log(user);
-  },[user])
   return(
     <Route
       {...rest}

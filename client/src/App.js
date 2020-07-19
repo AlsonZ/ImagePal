@@ -6,7 +6,7 @@ import Frontpage from './FrontPageComponent';
 import Login from './EntryComponent/LoginComponent.js';
 import Register from './EntryComponent/RegisterComponent.js';
 import Profile from './ProfileComponent';
-import{ EditPost, NewPost, CommentOnPost} from './FileUploadComponents';
+import{ EditPost, NewPost, CommentOnPost } from './FileUploadComponents';
 import PostPage from './PostPageComponent';
 import {UserProvider} from './Contexts/UserContext';
 import {PostsProvider} from './Contexts/PostsContext';

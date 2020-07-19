@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../PostComponent';
+import { UserContext } from '../Contexts/UserContext'
 import './style.css';
 
 const PostPage = (props) => {
 
   const [postData, setpostData] = useState('');
+  const [isAuthor, setIsAuthor] = useState(false);
+  const [user] = useContext(UserContext);
   const post = props.location.post ? props.location.post : postData;
 
   const fetchData = async () => {
@@ -20,11 +23,18 @@ const PostPage = (props) => {
       //redirect to frontpage as post doesnt exist
     }
   }
-
   useEffect(() => {
-    // get post if props.location.post does not exist
-    fetchData();
+    if(!props.location.post) {
+      fetchData();
+    }
   },[])
+  useEffect(() => {
+    if(user.username === post.author) {
+      setIsAuthor(true);
+    } else {
+      setIsAuthor(false);
+    }
+  },[user])
 
   const handleEdit = () => {
     // cannot edit if there is reactions or comments
@@ -36,7 +46,6 @@ const PostPage = (props) => {
     } else {
       return(`/Post/${post._id}`)
     }
-
   }
   const handleDelete = async () => {
     const url = '/API/posts/deletepost';
@@ -58,29 +67,38 @@ const PostPage = (props) => {
       console.log(resData);
     }
   }
-
   const handleComment = () => {
-    // if(true) {
     return({
       pathname: `/CommentOnPost/${post._id}`,
       postID: post._id
     })
-    // } else {
-      // return(`/Post/${post._id}`)
-    // }
+  }
+  const loadComments = () => {
+    if(post) {
+      return(
+        post.comments.map((comment) => {
+          const commentProp = {...comment, isComment: "isComment"}
+          return(<Post post={commentProp}/>)
+        })
+      )
+    }
   }
 
   return (
     <div className="postpage">
       <div className="postparent">
         <Post post={post}/>
+        <h1>Replies</h1>
+        {loadComments()}
       </div>
       <div className="sidebar">
         <div className="sidebar-box post-options">
           <h1>Post Options</h1>
-          <Link className="button" to={()=>handleEdit()} >Edit Post</Link>
-          <div className="button" onClick={()=>{handleDelete()}}>Delete Post</div>
-          <Link className="button" to={()=>handleComment()}>Comment on Post</Link>
+          {isAuthor && <Link className="button" to={()=>handleEdit()} >Edit Post</Link>}
+          {isAuthor && <div className="button" onClick={()=>{handleDelete()}}>Delete Post</div>}
+          <Link className="button" to={()=>handleComment()}>Reply To Post</Link>
+          {post && <div className="date">Uploaded at: <span>{post.uploadDate.toString().split('T')[0]}</span></div>}
+          {post.lastEditDate && <div className="date">Last Edited at: <span>{post.lastEditDate.toString().split('T')[0]}</span></div>}
         </div>
       </div>
     </div>

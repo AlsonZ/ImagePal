@@ -7,7 +7,7 @@ export const CommentOnPost = (props) => {
     props.history.push(`/post/${postID}`)
   }
   return (
-    <UploadPost url={`/API/posts/newComment/${postID}`} postID={postID} title="Create New Comment" onSuccess={onSuccess}/>
+    <UploadPost url={`/API/posts/newComment/${postID}`} postID={postID} title="Reply To Post" onSuccess={onSuccess}/>
   )
 }
 
