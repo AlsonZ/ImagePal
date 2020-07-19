@@ -127,11 +127,14 @@ router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction
 });
 
 router.post('/newComment/:postID', async (req, res) => {
-  const post = await Post.findByIdAndUpdate(req.params.postID, {
-    $push : {
-      comments : req.body.comment
-    }
-  },{new: true})
+  console.log('this is comment');
+  console.log(req.params.postID);
+  console.log(req.body);
+  // const post = await Post.findByIdAndUpdate(req.params.postID, {
+  //   $push : {
+  //     comments : req.body.comment
+  //   }
+  // },{new: true})
 })
 
 const handleImage = async (file, fileName) => {

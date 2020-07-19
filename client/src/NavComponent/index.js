@@ -5,28 +5,11 @@ import './style.css';
 
 const Nav = () => {
 
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const checkLoggedIn = async () => {
-    const res = await fetch('/API/users/checkLoggedIn');
-    if(res.status === 200) {
-      console.log('test');
-      console.log(res.status);
-      const resData = await res.json();
-      setUser(resData);
-    } else {
-      // not logged in or error
-    }
-  }
   useEffect(() => {
-    checkLoggedIn();
-  },[])
-
-  useEffect(() => {
-    // console.log(`testing use userID change ${userID.email}`);
-    // change Sign in and Sign up to profile link
-    if(user.email !== "") {
+    if(user.email && user.username) {
       setIsLoggedIn(true);
     }
   },[user])

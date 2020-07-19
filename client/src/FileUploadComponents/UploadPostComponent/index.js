@@ -1,21 +1,19 @@
 import React, { useState, useContext } from 'react';
 import imageCompression from 'browser-image-compression';
-import {UserContext} from '../Contexts/UserContext';
+import {UserContext} from '../../Contexts/UserContext';
 import './style.css';
 
 const UploadPost = (props) => {
 
-  const title = props.title ? props.title : 'Create New Post'
+  const title = props.title;
   const [user] = useContext(UserContext);
   const [fileName, setFileName] = useState("Choose File");
   const [inputFile, setInputFile] = useState('');
   const [compressedFile, setCompressedFile] = useState('');
   const [image, setImage] = useState('');
   const url = props.url;
-  // const url = '/API/posts/upload';
   const postID = props.postID ? props.postID : '';
   const commentID = props.commentID ? props.commentID : '';
-  // const onSuccess = props.onSuccess ? props.onSuccess : ()=>{};
 
   const handleImageChange = (e) => {
     if(e.target.files[0]) {
@@ -70,11 +68,10 @@ const UploadPost = (props) => {
     })
     const resData = await res.json();
     console.log(resData);
-    if(res.status === 200) {
-      props.onSuccessfulEdit();
-    } else if (res.status === 201) {
-      // redirect to post page
+    if(res.status === 200 || res.status === 201) {
       props.onSuccess(resData);
+    } else {
+      console.log('Failure to edit or create post or comment');
     }
   }
 

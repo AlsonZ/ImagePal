@@ -59,6 +59,16 @@ const PostPage = (props) => {
     }
   }
 
+  const handleComment = () => {
+    // if(true) {
+    return({
+      pathname: `/CommentOnPost/${post._id}`,
+      postID: post._id
+    })
+    // } else {
+      // return(`/Post/${post._id}`)
+    // }
+  }
 
   return (
     <div className="postpage">
@@ -68,10 +78,9 @@ const PostPage = (props) => {
       <div className="sidebar">
         <div className="sidebar-box post-options">
           <h1>Post Options</h1>
-          {/* onClick={()=>{handleEdit()}} */}
           <Link className="button" to={()=>handleEdit()} >Edit Post</Link>
           <div className="button" onClick={()=>{handleDelete()}}>Delete Post</div>
-          <div className="button" >Comment on Post</div>
+          <Link className="button" to={()=>handleComment()}>Comment on Post</Link>
         </div>
       </div>
     </div>
