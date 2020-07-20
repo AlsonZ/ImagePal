@@ -1,11 +1,20 @@
-* {
+:root {
   --base-colour: #279AF1;
   --highlight-colour: #23B5D3;
   --dark-highlight-colour: #1a6fb1;
-  --text-colour: black;
+  /* --text-colour: black; */
   --heading-colour: white;
   --textbox-colour: #E6E6E6;
   --underline-colour: #c7c7c7;
+
+  
+  --bg: #242526;
+  --bg-accent: #484a4d;
+  --text-colour: white;
+  --nav-size: 60px;
+  --border: 1px solid #474a4d;
+  --border-radius: 8px;
+  --speed: 500ms;
 }
 
 .App {

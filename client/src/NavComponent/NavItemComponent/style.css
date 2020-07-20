@@ -1,0 +1,10 @@
+.navitem {
+  width: calc(var(--nav-size) * 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navitem > .icon:hover {
+  filter: brightness(1.2);
+}
