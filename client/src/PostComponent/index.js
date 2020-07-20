@@ -5,6 +5,7 @@ import './style.css';
 
 const Post = ({post}) => {
   const [user] = useContext(UserContext);
+  const isFrontPage = !window.location.pathname.includes('/',1);
   const initialState = {
     love: '',
     happy: '',
@@ -80,23 +81,42 @@ const Post = ({post}) => {
 
   }
 
+  const loadPost = () => {
+    if(isFrontPage) {
+      return(
+        <Link 
+          key={post._id}
+          to={{
+            pathname: `/Post/${post._id}`,
+            post: post,
+          }} 
+          className="postLink"
+        >
+          <div className="user">
+            Posted by {post.author}
+          </div>
+          <div className="image">
+            <img src={post.imageUrl} height={post.height} width={post.width}/>
+          </div>
+        </Link>
+      )
+    } else {
+      return (
+        <>
+          <div className="user">
+            Posted by {post.author}
+          </div>
+          <div className="image">
+            <img src={post.imageUrl} height={post.height} width={post.width}/>
+          </div>
+        </>
+      )
+    }
+  }
+
   return (
     <div className="post">
-      <Link 
-        key={post._id}
-        to={{
-          pathname: `/Post/${post._id}`,
-          post: post,
-        }} 
-        className="postLink"
-      >
-      <div className="user">
-        Posted by {post.author}
-      </div>
-      <div className="image">
-        <img src={post.imageUrl} height={post.height} width={post.width}/>
-      </div>
-      </Link>
+      {loadPost()}
       <ul className={`emojis ${post.isComment}`}>
         <li className={emojis.love} onClick={()=>{handleEmojis({emoji: 'love'})}}>😍</li>
         <li className={emojis.happy} onClick={()=>{handleEmojis({emoji: 'happy'})}}>😊</li>

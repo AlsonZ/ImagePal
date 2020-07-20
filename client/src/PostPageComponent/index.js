@@ -24,9 +24,7 @@ const PostPage = (props) => {
     }
   }
   useEffect(() => {
-    if(!props.location.post) {
-      fetchData();
-    }
+    fetchData();
   },[])
   useEffect(() => {
     if(user.username === post.author) {
@@ -44,7 +42,8 @@ const PostPage = (props) => {
         postID: post._id
       })
     } else {
-      return(`/Post/${post._id}`)
+      // return(`/Post/${post._id}`)
+      return;
     }
   }
   const handleDelete = async () => {
