@@ -15,17 +15,17 @@
   grid-area: sidebar;
 }
 .postpage .sidebar-box {
-  background-color: white;
-  border-radius: 3px;
-  border: 1px solid lightgrey;
+  background-color: var(--box-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
   margin: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
   user-select: none;
 }
 .postpage .sidebar-box h1 {
-  background-color: var(--dark-highlight-colour);
-  color: white;
+  background-color: var(--box-bg-accent);
+  color: var(--text);
   font-size: 1.3rem;
   font-weight: normal;
   padding: 0.5rem;
@@ -38,10 +38,10 @@
   cursor: pointer;
   text-decoration: none;
   display: block;
-  color: var(--dark-highlight-colour);
+  color: var(--text);
 }
 .postpage .sidebar-box .button:hover {
-  background-color: lightgrey;
+  background-color: var(--item-bg-accent);
 }
 
 .postpage .postparent {
@@ -54,17 +54,17 @@
 
 .postpage .postparent h1 {
   margin: 0;
-  color: var(--dark-highlight-colour);
-  font-size: 1.2rem;
-  border-bottom: solid var(--underline-colour) 1px;
+  color: var(--text);
+  font-size: 1.1rem;
+  border-bottom: var(--border) ;
 }
 
 .postpage .sidebar .date {
   padding: 0.6rem;
-  color: var(--dark-highlight-colour);
+  color: var(--text);
 }
 .postpage .sidebar .date span {
-  color: var(--highlight-colour);
+  color: var(--text);
 }
 
 @media only screen and (max-width: 65rem) {

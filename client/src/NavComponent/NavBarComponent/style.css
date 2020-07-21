@@ -8,18 +8,20 @@
 
 .navbar {
   height: var(--nav-size);
-  background-color: var(--bg);
+  background-color: var(--box-bg);
   padding: 0 1rem;
   border-bottom: var(--border);
+  color: var(--text);
 }
 
-.navbar-nav {
+.navbar-items {
   list-style: none;
   margin: 0;
   padding: 0;
   max-width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: row;
   justify-content: flex-end;
 }
 
@@ -27,7 +29,7 @@
   --button-size: calc(var(--nav-size) * 0.5);
   width: var(--button-size);
   height: var(--button-size);
-  background-color: var(--bg-accent);
+  background-color: var(--item-bg);
   border-radius: 50%;
   padding: 5px;
   margin: 2px;
@@ -35,12 +37,12 @@
   align-items: center;
   justify-content: center;
   transition: filter 300ms;
-  color: var(--text-colour);
+  color: var(--text);
   cursor: pointer;
 }
 .icon svg {
-  fill: var(--text-colour);
-  color: var(--text-colour);
+  fill: var(--text);
+  color: var(--text);
   width: 20px;
   height: 20px;
 }

@@ -3,7 +3,7 @@
   top: var(--nav-size);
   width: 300px;
   transform: translate(-45%);
-  background-color: var(--bg);
+  background-color: var(--box-bg);
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 1rem;
@@ -24,7 +24,7 @@
   padding: 0.5rem;
 }
 .menu-item:hover {
-  background-color: #525357;
+  background-color: var(--item-bg-accent);
 }
 .menu-item .icon {
   margin-right: 0.5rem;

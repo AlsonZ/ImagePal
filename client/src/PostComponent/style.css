@@ -1,17 +1,19 @@
 .post {
-  background-color: white;
+  background-color: var(--box-bg);
   width: 45rem;
   max-height: 24rem;
   max-width: 95%;
   margin: 1rem;
   border-radius: 5px;
-  border: 1px solid lightgrey;
+  border: var(--border);
   display: flex;
   flex-direction: column;
 }
 
 .post .user, .post .emojis {
-  background-color: rgb(247, 247, 247);
+  /* background-color: rgb(247, 247, 247); */
+  background-color: var(--box-bg);
+  filter: brightness(95%);
   padding: 0.5rem;
   border-radius: 5px;
 }
@@ -32,17 +34,18 @@
   font-size: 1.8rem;
   margin: 0.1rem 1rem;
   padding: 0 0.3rem;
-  color: grey;
+  color: var(--item-bg-accent);
   filter: grayscale(1);
 }
 .post .emojis .active, .post .emojis li:hover {
-  color: var(--base-colour);
+  color: var(--text-accent);
   font-weight: bold;
   filter: grayscale(0);
 }
 
 .post .user {
-  color: grey;
+  color: var(--text);
+  filter: opacity(0.6);
 }
 
 .post .image {

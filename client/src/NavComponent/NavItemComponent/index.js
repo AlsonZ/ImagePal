@@ -7,9 +7,14 @@ const Navitem = (props) => {
   const [open, setOpen] = useState(false);
 
   return(
-    <li className="navitem">
-      <Link to={props.link} className="icon" onClick={() => {setOpen(!open)}}>
-        {props.icon}
+    <li className="navitem-container">
+      <Link to={props.link} className="navitem" onClick={() => {setOpen(!open)}}>
+        {props.icon && <span className="icon">
+          {props.icon}
+        </span>}
+        {props.text && <span className="navitem-text">
+          {props.text}
+        </span>}
       </Link>
       {open && props.children}
     </li>

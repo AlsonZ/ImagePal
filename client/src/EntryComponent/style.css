@@ -1,17 +1,17 @@
 .entry {
   width: 85%; /* for mobiles with width smaller than 360 */
   max-width: 24rem; /* for web so the box isnt so big */
-  padding: 1rem 3rem 5rem 3rem;
-  background: white;
+  padding: 3rem 3rem 3rem 3rem;
+  background-color: var(--box-bg);
   box-sizing: border-box;
   margin: auto;
   animation: fadeIn 1s;
 }
 
 .entry h1{
-  color: var(--base-colour);
+  color: var(--text-accent);
 	margin: 0;
-	padding: 2rem 0rem;
+	padding-bottom: 1.3rem;
   font-size: 2rem;
   user-select: none;
 }
@@ -19,28 +19,30 @@
 .input {
   display: inline-block;
   font-size: 1.125rem;
-	color: var(--dark-highlight-colour);
-	background-color: var(--textbox-colour);
+	color: var(--text);
+	background-color: var(--item-bg);
 	width: 100%;
   padding: 13px 20px 13px 20px;
   margin: 0 0 1.3rem 0;
 	box-sizing: border-box;
-	border: 3px solid rgba(0,0,0,0);
+  /* border: 3px solid rgba(0,0,0,0); */
+  border: var(--border);
 }
 .input:focus {
-	background: white;
-	border: 3px solid var(--base-colour);
+	background: var(--item-bg-accent);
+	border: 1px solid var(--text-accent);
 	outline: none;
 }
 
 .submit {
   width: 100%;
   padding: 1.2rem 20px;
-  background-color: var(--base-colour);
-  color: white;
+  background-color: var(--text-dark-accent);
+  color: var(--text);
   font-size: 1.1rem;
   border-radius: 0.5vh;
   border: none;
+  margin-bottom: 0.3rem;
 }
 
 .submit:hover {
@@ -48,16 +50,16 @@
 }
 
 .submit:active {
-  filter: brightness(115%);
+  filter: brightness(80%);
 }
 
 .submit:focus {
   outline: none;
-  box-shadow: 0 0 4px #000000;
+  box-shadow: 0 0 4px var(--text);
 }
 
 .entry-link {
-  color: var(--base-colour);
+  color: var(--text-accent);
   text-decoration: none;
   font-size: 0.85rem;
 }
@@ -68,6 +70,7 @@
 .error-text {
   color: red;
   padding: 0;
+  padding-bottom: 0.2rem;
   margin: 0;
   font-size: 1rem;
   opacity: 0;

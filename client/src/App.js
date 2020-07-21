@@ -17,7 +17,7 @@ function App() {
     <>
       <UserProvider>
         <PostsProvider>
-          <div className="App">
+          <div className="App darkmode">
             <Router>
               <Nav/>
               <div className="components">

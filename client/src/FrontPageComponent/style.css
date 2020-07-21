@@ -1,5 +1,4 @@
 .frontpage {
-  /* background-color: darkgoldenrod; */
   max-width: 100%;
   width: 65rem;
   height: 100%;
@@ -22,11 +21,12 @@
   border-radius: 3px;
 }
 .frontpage .sorting {
-  background-color: white;
+  background-color: var(--box-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
   width: 45rem;
   max-width: 95%;
   margin: 1rem;
-  border: 1px solid lightgrey;
   display: flex;
   justify-content: center;
 }
@@ -45,16 +45,15 @@
 }
 
 .frontpage .sidebar-box {
-  background-color: white;
-  border-radius: 3px;
-  border: 1px solid lightgrey;
+  background-color: var(--box-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
   margin: 0.5rem;
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
 .frontpage .sidebar-box h1 {
-  background-color: var(--dark-highlight-colour);
-  color: white;
+  color: var(--text-accent);
   font-size: 1.3rem;
   font-weight: normal;
   padding: 0.5rem;
@@ -63,45 +62,59 @@
 }
 .frontpage .sidebar-box p {
   margin: 0.6rem;
+  color: var(--text);
 }
 
 .frontpage .button {
+  color: var(--text);
   padding: 0.3rem 1rem;
   padding-bottom: 0.4rem;
   user-select: none;
   cursor: pointer;
   font-size: 0.8rem;
-  
   border-radius: 5rem;
-  color: var(--dark-highlight-colour);
   margin: 0.6rem 1rem;
   display: inline-block;
+  border:var(--border);
+  transition: ease-in-out 200ms;
 }
 .frontpage .button:hover {
-  background-color: rgb(247, 247, 247);
-  color: var(--highlight-colour);
+  background-color: var(--item-bg-accent);
+  color: var(--text-accent);
 }
 .frontpage .button:active {
   filter: brightness(90%);
 }
 .frontpage .new-sort, .frontpage .top-sort {
-  border: 1.6px solid var(--dark-highlight-colour);
+  color: var(--text-accent);
+  background-color: var(--item-selected);
+}
+.frontpage .top-sort:hover, .frontpage .new-sort:hover {
+  color: var(--text-accent);
+  background-color: var(--item-selected);
+  filter: brightness(80%);
+}
+.frontpage .top-sort:active, .frontpage .new-sort:active {
+  filter: brightness(70%);
 }
 
 .overlay {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
+  margin: 0 1rem 1rem 0;
   position: fixed;
   bottom: 0;
   right: 0;
+  border-radius: 5rem;
+  z-index: 2;
 }
 
 .overlay .upload-button {
-  background-color: var(--base-colour);
+  background-color: var(--text-accent);
+  color: var(--text);
   width: 4rem;
   height: 4rem;
   font-size: 4rem;
-  color: white;
   border-radius: 5rem;
   text-align: center;
   line-height: 3.2rem;
@@ -110,10 +123,10 @@
   z-index: 2;
 }
 .overlay .upload-button:hover {
-  filter: brightness(110%);
+  filter: brightness(80%);
 }
 .overlay .upload-button:active {
-  filter: brightness(90%);
+  filter: brightness(70%);
 }
 
 .overlay .links {

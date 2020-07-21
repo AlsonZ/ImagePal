@@ -5,7 +5,7 @@ const Navbar = (props) => {
   return(
     <div className="nav-parent">
       <nav className="navbar">
-        <ul className="navbar-nav">
+        <ul className="navbar-items">
           {props.children}
         </ul>
       </nav>

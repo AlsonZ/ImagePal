@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react';
 import {Link} from 'react-router-dom';
 import {ReactComponent as UserIcon} from '../icons/user.svg'
 import {ReactComponent as CaretIcon} from '../icons/caret.svg'
+import {ReactComponent as HomeIcon} from '../icons/home.svg'
 import {UserContext} from '../Contexts/UserContext';
 import NavBar from './NavBarComponent' 
 import NavItem from './NavItemComponent' 
@@ -21,10 +22,15 @@ const Nav = () => {
 
   return (
     <NavBar>
-      <NavItem link="/profile" icon={<UserIcon/>}/>
-      <NavItem icon={<CaretIcon/>}>
+      <Link className="title-parent" to="/">
+        <span className="icon"><HomeIcon/></span>
+        <span className="title">ImagePal</span>
+      </Link>
+      {!isLoggedIn && <NavItem link="/login" text="Sign In"/>}
+      {!isLoggedIn && <NavItem link="/register" text="Sign Up"/>}
+      {!isLoggedIn && <NavItem icon={<CaretIcon/>}>
         <DropDownMenu/>
-      </NavItem>
+      </NavItem>}
     </NavBar>
     // <nav>
     //   <ul>
