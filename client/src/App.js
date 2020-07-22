@@ -28,8 +28,9 @@ function App() {
               <Route exact path="/" component={Frontpage}/>  
               <Route exact path="/Login" component={Login}/>  
               <Route exact path="/Register" component={Register}/>  
-              <Route exact path="/Profile/:id" component={Profile}/>  
               <Route exact path="/Post/:id" component={PostPage}/>  
+              <ProtectedRoute exact path="/Profile" component={Profile}/>  
+              <ProtectedRoute exact path="/Settings" component={Profile}/>  
               <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
               <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
               <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  

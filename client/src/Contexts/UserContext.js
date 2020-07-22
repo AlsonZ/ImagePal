@@ -4,11 +4,13 @@ export const UserContext = createContext();
 
 export const UserProvider = (props) => {
 
-  const [user, setUser] = useState({
+  const initialUser = {
     email: "",
     username: "",
     loading: true,
-  });
+  }
+
+  const [user, setUser] = useState(initialUser);
 
   const checkLoggedIn = async () => {
     const res = await fetch('/API/users/checkLoggedIn');
@@ -24,7 +26,7 @@ export const UserProvider = (props) => {
     } else {
       // not logged in or error
       setUser({
-        ...user,
+        ...initialUser,
         loading: false
       })
     }

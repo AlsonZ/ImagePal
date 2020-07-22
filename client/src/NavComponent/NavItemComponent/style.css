@@ -26,7 +26,7 @@
   filter: brightness(80%);
 }
 .navitem-text {
-  min-width: 56px;
+  /* min-width: 56px; */
   color: var(--text);
   border: var(--border);
   border-radius: var(--border-radius);

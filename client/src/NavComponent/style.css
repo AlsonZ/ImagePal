@@ -1,7 +1,7 @@
 .navbar .title-parent {
   color: var(--text);
   text-align: center;
-  margin: 0.4rem 0;
+  margin: auto 0;
   margin-right: auto;
   padding: 0.1rem 0rem;
   padding-right: 0.5rem;
@@ -42,5 +42,9 @@
   }
   .navbar .title-parent .title {
     display: none;
+  }
+  .navbar .title-parent .icon {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }

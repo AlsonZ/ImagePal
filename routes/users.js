@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
 
 router.post('/logout', (req, res) => {
   req.session.destroy();
-  res.json('logout success');
+  res.status(200).json('logout success');
 })
 
 router.post('/register', checkDuplicateUser, async (req, res) => {

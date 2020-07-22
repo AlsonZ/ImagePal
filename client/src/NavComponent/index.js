@@ -17,6 +17,8 @@ const Nav = () => {
   useEffect(() => {
     if(user.email && user.username) {
       setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
     }
   },[user])
 
@@ -28,20 +30,10 @@ const Nav = () => {
       </Link>
       {!isLoggedIn && <NavItem link="/login" text="Sign In"/>}
       {!isLoggedIn && <NavItem link="/register" text="Sign Up"/>}
-      {!isLoggedIn && <NavItem icon={<CaretIcon/>}>
+      {isLoggedIn && <NavItem icon={<CaretIcon/>}>
         <DropDownMenu/>
       </NavItem>}
     </NavBar>
-    // <nav>
-    //   <ul>
-    //     {/* <Link to='/' className="links"><li>ImagePal</li></Link> */}
-    //     {/* <Link to='/Leaderboard' className="links"><li>LeaderBoard</li></Link> */}
-    //     {/* add SVG of profile pic image thing here*/}
-    //     {/* {isLoggedIn && <Link to='/Profile' className="links"><li>{user.username}</li></Link>} */}
-    //     {/* {!isLoggedIn && <Link to='/Login' className="links"><li>Sign In</li></Link>} */}
-    //     {/* {!isLoggedIn && <Link to='/Register' className="links"><li>Sign Up</li></Link>} */}
-    //   </ul>
-    // </nav>
   );
 }
 
