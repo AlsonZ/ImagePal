@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import './App.css';
 import Nav from './NavComponent';
@@ -10,31 +10,35 @@ import{ EditPost, NewPost, CommentOnPost } from './FileUploadComponents';
 import PostPage from './PostPageComponent';
 import {UserProvider} from './Contexts/UserContext';
 import {PostsProvider} from './Contexts/PostsContext';
+import {ThemeContext} from './Contexts/ThemeContext';
 import ProtectedRoute from './ProtectedRoute'
 
 function App() {
+
+  const [theme] = useContext(ThemeContext)
+
   return (
-    <>
-      <UserProvider>
-        <PostsProvider>
-          <div className="App darkmode">
-            <Router>
-              <Nav/>
-              <div className="components">
-                <Route exact path="/" component={Frontpage}/>  
-                <Route exact path="/Login" component={Login}/>  
-                <Route exact path="/Register" component={Register}/>  
-                <Route exact path="/Profile/:id" component={Profile}/>  
-                <Route exact path="/Post/:id" component={PostPage}/>  
-                <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
-                <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
-                <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  
-              </div>
-            </Router>
-          </div>
-        </PostsProvider>
-      </UserProvider>
-    </>
+  <>
+    <UserProvider>
+      <PostsProvider>
+        <div className={`App ${theme}`}>
+          <Router>
+            <Nav/>
+            <div className="components">
+              <Route exact path="/" component={Frontpage}/>  
+              <Route exact path="/Login" component={Login}/>  
+              <Route exact path="/Register" component={Register}/>  
+              <Route exact path="/Profile/:id" component={Profile}/>  
+              <Route exact path="/Post/:id" component={PostPage}/>  
+              <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
+              <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
+              <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  
+            </div>
+          </Router>
+        </div>
+      </PostsProvider>
+    </UserProvider>
+  </>
   );
 }
 

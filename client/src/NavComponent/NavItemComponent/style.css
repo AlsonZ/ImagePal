@@ -1,7 +1,5 @@
 .navitem-container {
-  /* width: calc(var(--nav-size) * 1.1); */
   display: flex;
-  /* flex-direction: row; */
   justify-content: center;
   align-items: center;
 }
@@ -10,8 +8,22 @@
   flex-direction: row;
   text-decoration: none;
 }
+
 .navitem > .icon:hover {
-  filter: brightness(1.2);
+  background-color: var(--item-bg-accent);
+}
+.navitem > .icon:hover svg{
+  fill: var(--text-accent);
+}
+.active > .icon {
+  background-color: var(--item-selected);
+}
+.active > .icon svg {
+  fill: var(--text-accent);
+}
+.active > .icon:hover {
+  background-color: var(--item-selected);
+  filter: brightness(80%);
 }
 .navitem-text {
   min-width: 56px;
@@ -21,6 +33,10 @@
   padding: 0.3rem 1rem;
   padding-bottom: 0.4rem;
   margin: 7px;
+}
+.navitem-text:hover {
+  background-color: var(--item-bg-accent);
+  color: var(--text-accent);
 }
 
 

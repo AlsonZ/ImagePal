@@ -5,10 +5,20 @@ import './style.css';
 const Navitem = (props) => {
   //possibly turn into context
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('');
+
+  const onClick = () => {
+    setOpen(!open);
+    if(active) {
+      setActive('');
+    } else {
+      setActive('active');
+    }
+  }
 
   return(
     <li className="navitem-container">
-      <Link to={props.link} className="navitem" onClick={() => {setOpen(!open)}}>
+      <Link to={props.link} className={`navitem ${active}`} onClick={() => {onClick()}}>
         {props.icon && <span className="icon">
           {props.icon}
         </span>}

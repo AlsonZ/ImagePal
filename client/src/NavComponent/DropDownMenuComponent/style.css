@@ -22,9 +22,11 @@
   border-radius: var(--border-radius);
   transition: background var(--speed);
   padding: 0.5rem;
+  cursor: pointer;
 }
-.menu-item:hover {
+.menu-item:hover, .menu-item:hover .icon svg {
   background-color: var(--item-bg-accent);
+  color: var(--text-accent)
 }
 .menu-item .icon {
   margin-right: 0.5rem;

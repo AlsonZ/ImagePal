@@ -26,11 +26,11 @@
 }
 
 .icon {
-  --button-size: calc(var(--nav-size) * 0.5);
+  --button-size: calc(var(--nav-size) * 0.4);
   width: var(--button-size);
   height: var(--button-size);
-  background-color: var(--item-bg);
-  border-radius: 50%;
+  border-radius: var(--border-radius);
+  border: var(--border);
   padding: 5px;
   margin: 2px;
   display: flex;

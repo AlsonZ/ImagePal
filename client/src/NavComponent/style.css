@@ -1,22 +1,45 @@
 .navbar .title-parent {
   color: var(--text);
   text-align: center;
+  margin: 0.4rem 0;
   margin-right: auto;
-  padding: 0.5rem 0rem;
+  padding: 0.1rem 0rem;
+  padding-right: 0.5rem;
   user-select: none;
   cursor: pointer;
   font-size: 1.5rem;
   display: flex;
   text-decoration: none;
+  
+  border: var(--border);
+  border-radius: var(--border-radius);
+}
+.navbar .title-parent:hover {
+  background-color: var(--item-bg);
 }
 
 .navbar .title-parent .title {
-  padding-top: 0.3rem;
+  padding-top: 0.2rem;
   padding-left: 7px;
 }
-
+.navbar .title-parent:hover .title {
+  color: var(--text-accent);
+}
+.navbar .title-parent .icon {
+  padding-top: 0.5rem;
+  background-color: transparent;
+  /* border-radius: var(--border-radius); */
+  border: none;
+}
+.navbar .title-parent:hover .icon svg {
+  fill: var(--text-accent);
+  color: var(--text-accent);
+}
 
 @media only screen and (max-width: 440px) {
+  .navbar .title-parent {
+    padding-right: 0;
+  }
   .navbar .title-parent .title {
     display: none;
   }
