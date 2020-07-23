@@ -2,6 +2,8 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = require('../models/user');
+const Post = require('../models/post');
+const user = require('../models/user');
 const router = express.Router();
 
 router.get('/checkLoggedIn', async (req, res) => {
@@ -74,6 +76,17 @@ router.post('/register', checkDuplicateUser, async (req, res) => {
   console.log('new user registered: ' + req.body.email);
   res.status(201).json({message: 'registered'});
 });
+
+router.get('/posts', async (req, res) => {
+  // check logged in
+  try {
+    const [user] = await User.find({user_token: req.session.userID});
+    const userPosts = await Post.find({_id: { $in: user.posts}});
+    res.status(200).json(userPosts);
+  } catch (error) {
+    console.log('user posts: ', error);
+  }
+})
 
 async function checkDuplicateUser(req, res, next) {
   if(await checkElement("email", req.body.email.toLowerCase())) {

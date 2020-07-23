@@ -1,0 +1,117 @@
+.profile {
+  display: grid;
+  width: 65rem;
+  margin-left: auto;
+  margin-right: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "main sidebar";
+}
+
+.profile .main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile .main-content {
+  background-color: var(--box-bg);
+  width: 45rem;
+  max-width: 95%;
+  margin: 1rem;
+  border-radius: var(--border-radius);
+  border: var(--border);
+  display: flex;
+  flex-direction: column;
+}
+.profile .form-container {
+  padding: 3rem;
+}
+
+.profile .sidebar {
+  grid-area: sidebar;
+}
+
+.profile .sidebar-box {
+  background-color: var(--box-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  margin: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.profile .sidebar-box h1 {
+  color: var(--text-accent);
+  font-size: 1.3rem;
+  font-weight: normal;
+  padding: 0.5rem;
+  border-radius: 3px;
+  margin: 0;
+}
+.profile .sidebar-box p {
+  margin: 0.6rem;
+  color: var(--text);
+}
+.profile .sidebar-box .button {
+  margin: 0;
+  padding: 0.6rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  color: var(--text);
+}
+.profile .sidebar-box .button:hover {
+  background-color: var(--item-bg-accent);
+}
+
+.profile h1{
+  color: var(--text-accent);
+	margin: 0;
+	padding-bottom: 1.3rem;
+  font-size: 2rem;
+  user-select: none;
+}
+
+.input {
+  display: inline-block;
+  font-size: 1.125rem;
+	color: var(--text);
+	background-color: var(--item-bg);
+	width: 100%;
+  padding: 13px 20px 13px 20px;
+  margin: 0.2rem 0 1.2rem 0;
+	box-sizing: border-box;
+  /* border: 3px solid rgba(0,0,0,0); */
+  border: var(--border);
+}
+.input:focus {
+	background: var(--item-bg-accent);
+	border: 1px solid var(--text-accent);
+	outline: none;
+}
+
+.submit {
+  width: 100%;
+  padding: 1.2rem 20px;
+  background-color: var(--text-dark-accent);
+  color: white;
+  font-size: 1.1rem;
+  border-radius: 0.5vh;
+  border: none;
+  margin-bottom: 0.3rem;
+  margin-top: 0.2rem;
+}
+
+.submit:hover {
+  filter: brightness(90%);
+}
+
+.submit:active {
+  filter: brightness(80%);
+}
+
+.submit:focus {
+  outline: none;
+  box-shadow: 0 0 4px var(--text);
+}

@@ -3,22 +3,18 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 const Navitem = (props) => {
-  //possibly turn into context
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState('');
 
   const onClick = () => {
-    setOpen(!open);
-    if(active) {
-      setActive('');
-    } else {
-      setActive('active');
+    if(props.active) {
+      props.setActive('');
+    } else if (props.setActive) {
+      props.setActive('active');
     }
   }
 
   return(
     <li className="navitem-container">
-      <Link to={props.link} className={`navitem ${active}`} onClick={() => {onClick()}}>
+      <Link to={props.link} className={`navitem ${props.active}`} onClick={() => {onClick()}}>
         {props.icon && <span className="icon">
           {props.icon}
         </span>}
@@ -26,7 +22,7 @@ const Navitem = (props) => {
           {props.text}
         </span>}
       </Link>
-      {open && props.children}
+      {props.active && props.children}
     </li>
   )
 }

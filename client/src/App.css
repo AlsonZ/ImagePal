@@ -16,6 +16,7 @@
   --border-colour: #484a4d;
   --border: 1px solid #484a4d;
   --border-radius: 3px;
+  color: var(--text);
 }
 .lightmode {
   --base-bg: #e6e6e6;
@@ -30,6 +31,7 @@
   --border-colour: lightgrey;
   --border: 1px solid lightgrey;
   --border-radius: 3px;
+  color: var(--text);
 }
 
 .App {

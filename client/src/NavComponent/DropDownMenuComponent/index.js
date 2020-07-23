@@ -28,9 +28,12 @@ const DropDownMenu = (props) => {
 
   const handleThemeChange = (theme) => {
     setTheme(theme);
+    props.setActive('');
   }
   const handleLink = (location) => {
     setLocation(location);
+    //allow time for a redirect before closing menu
+    setTimeout(()=>{props.setActive('');}, 10)
   }
   const handleLogout = async () => {
     const res = await fetch('/API/users/logout', {
@@ -38,6 +41,7 @@ const DropDownMenu = (props) => {
       headers: {'Content-Type': 'application/json'},
     });
     if(res.status === 200) {
+      props.setActive('');
       window.location.reload();
     }
     const resData = await res.json();
@@ -50,7 +54,7 @@ const DropDownMenu = (props) => {
         <DropDownItem icon={<MoonIcon/>} name="DarkMode" onClick={()=>{handleThemeChange('darkmode')}}/>
         <DropDownItem icon={<SunIcon/>} name="LightMode" onClick={()=>{handleThemeChange('lightmode')}}/>
         <DropDownItem icon={<UserIcon/>} name="Profile" onClick={()=>{handleLink('/profile')}}/>
-        <DropDownItem icon={<CogIcon/>} name="Settings" onClick={()=>{handleLink('/settings')}}/>
+        {/* <DropDownItem icon={<CogIcon/>} name="Settings" onClick={()=>{handleLink('/settings')}}/> */}
         <DropDownItem icon={<ExitIcon/>} name="Logout" onClick={()=>{handleLogout()}}/>
       </div>
       {location && <Redirect push to={location}/>}

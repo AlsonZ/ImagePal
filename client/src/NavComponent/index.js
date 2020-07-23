@@ -13,6 +13,7 @@ const Nav = () => {
 
   const [user] = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [active, setActive] = useState('');
 
   useEffect(() => {
     if(user.email && user.username) {
@@ -20,7 +21,7 @@ const Nav = () => {
     } else {
       setIsLoggedIn(false);
     }
-  },[user])
+  },[user]);
 
   return (
     <NavBar>
@@ -30,8 +31,8 @@ const Nav = () => {
       </Link>
       {!isLoggedIn && <NavItem link="/login" text="Sign In"/>}
       {!isLoggedIn && <NavItem link="/register" text="Sign Up"/>}
-      {isLoggedIn && <NavItem icon={<CaretIcon/>}>
-        <DropDownMenu/>
+      {isLoggedIn && <NavItem icon={<CaretIcon/>} active={active} setActive={setActive}>
+        <DropDownMenu active={active} setActive={setActive}/>
       </NavItem>}
     </NavBar>
   );

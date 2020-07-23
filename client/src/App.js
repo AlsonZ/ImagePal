@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Nav from './NavComponent';
 import Frontpage from './FrontPageComponent';
@@ -25,15 +25,17 @@ function App() {
           <Router>
             <Nav/>
             <div className="components">
-              <Route exact path="/" component={Frontpage}/>  
-              <Route exact path="/Login" component={Login}/>  
-              <Route exact path="/Register" component={Register}/>  
-              <Route exact path="/Post/:id" component={PostPage}/>  
-              <ProtectedRoute exact path="/Profile" component={Profile}/>  
-              <ProtectedRoute exact path="/Settings" component={Profile}/>  
-              <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
-              <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
-              <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  
+              <Switch>
+                <Route exact path="/" component={Frontpage}/>  
+                <Route exact path="/Login" component={Login}/>  
+                <Route exact path="/Register" component={Register}/>  
+                <Route exact path="/Post/:id" component={PostPage}/>  
+                <ProtectedRoute path="/Profile" component={Profile}/>  
+                {/* <ProtectedRoute exact path="/Settings" component={Profile}/>   */}
+                <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
+                <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
+                <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  
+              </Switch>
             </div>
           </Router>
         </div>
