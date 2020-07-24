@@ -96,29 +96,38 @@ router.get('/posts', checkLoggedIn, async (req, res) => {
 });
 
 router.post('/change/:type', checkLoggedIn, async (req, res) => {
-  if(req.params.type === 'password') {
-    if(req.body.newPassword === req.body.checkPassword) {
+  if(req.params.type === 'Password' || req.params.type === 'Email') {
+    if(req.body.newItem === req.body.checkItem) {
       try {
         const [user] = await User.find({user_token: req.session.userID});
         if(user) {
-          if(bcrypt.compareSync(req.body.oldPassword, user.password)) {
-            const hashedPassword = bcrypt.hashSync(req.body.newPassword, 10);
-            await User.findByIdAndUpdate(user._id, {
-              password: hashedPassword
-            });
-            res.status(200).json('Successful password change');
-          } else {
-            res.status(409).json('The password you entered is incorrect')
+          if(req.params.type === 'Password') {
+            if(bcrypt.compareSync(req.body.oldItem, user.password)) {
+              const hashedPassword = bcrypt.hashSync(req.body.newItem, 10);
+              await User.findByIdAndUpdate(user._id, {
+                password: hashedPassword
+              });
+              res.status(200).json('Successful Password change');
+            } else {
+              res.status(409).json('The Password you entered is incorrect')
+            }
+          } else if( req.params.type === 'Email') {
+            if(req.body.oldItem.toLowerCase() === user.email) {
+              await User.findByIdAndUpdate(user._id, {
+                email: req.body.newItem
+              });
+              res.status(200).json('Successful Email change');
+            } else {
+              res.status(409).json('The Email you entered is incorrect')
+            }
           }
         }
       } catch (error) {
         console.log('change: ', error)
       }
     } else {
-      res.status(409).json('The passwords do not match');
+      res.status(409).json(`The ${req.params.type}s do not match`);
     }
-  } else if(req.params.type === 'email') {
-
   } else {
     // not possible
   }
