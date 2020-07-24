@@ -6,6 +6,14 @@ const Post = require('../models/post');
 const user = require('../models/user');
 const router = express.Router();
 
+const checkLoggedIn = (req, res, next) => {
+  if (req.session.userID) {
+    next();
+  } else {
+    res.status(401).json('Login is required');
+  }
+}
+
 router.get('/checkLoggedIn', async (req, res) => {
   const userID = req.session.userID;
   console.log('Check if user is already logged in: '+userID);
@@ -77,8 +85,7 @@ router.post('/register', checkDuplicateUser, async (req, res) => {
   res.status(201).json({message: 'registered'});
 });
 
-router.get('/posts', async (req, res) => {
-  // check logged in
+router.get('/posts', checkLoggedIn, async (req, res) => {
   try {
     const [user] = await User.find({user_token: req.session.userID});
     const userPosts = await Post.find({_id: { $in: user.posts}});
@@ -86,7 +93,36 @@ router.get('/posts', async (req, res) => {
   } catch (error) {
     console.log('user posts: ', error);
   }
-})
+});
+
+router.post('/change/:type', checkLoggedIn, async (req, res) => {
+  if(req.params.type === 'password') {
+    if(req.body.newPassword === req.body.checkPassword) {
+      try {
+        const [user] = await User.find({user_token: req.session.userID});
+        if(user) {
+          if(bcrypt.compareSync(req.body.oldPassword, user.password)) {
+            const hashedPassword = bcrypt.hashSync(req.body.newPassword, 10);
+            await User.findByIdAndUpdate(user._id, {
+              password: hashedPassword
+            });
+            res.status(200).json('Successful password change');
+          } else {
+            res.status(409).json('The password you entered is incorrect')
+          }
+        }
+      } catch (error) {
+        console.log('change: ', error)
+      }
+    } else {
+      res.status(409).json('The passwords do not match');
+    }
+  } else if(req.params.type === 'email') {
+
+  } else {
+    // not possible
+  }
+});
 
 async function checkDuplicateUser(req, res, next) {
   if(await checkElement("email", req.body.email.toLowerCase())) {
@@ -113,5 +149,7 @@ async function checkElement(elementName, element) {
     return false;
   }
 }
+
+
 
 module.exports = router;
