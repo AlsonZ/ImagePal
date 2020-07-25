@@ -11,8 +11,9 @@ const Frontpage = () => {
   const [user] = useContext(UserContext);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [sort, setSort] = useState('new-sort');
+  const [leaderboard, setLeaderboard] = useState([]);
 
-  const fetchData = async (sortType) => {
+  const fetchPosts = async (sortType) => {
     let res = await fetch(`/API/posts/frontpage/${sortType}/10`);
     if(res.status === 200) {
       const resData = await res.json();
@@ -21,8 +22,17 @@ const Frontpage = () => {
     }
   }
 
+  const fetchLeaderboard = async () => {
+    const res = await fetch('/API/users/leaderboard');
+    if(res.status === 200) {
+      const resData = await res.json();
+      setLeaderboard(resData);
+    }
+  }
+
   useEffect(() => {
-    fetchData();
+    fetchPosts();
+    fetchLeaderboard();
   },[])
 
   useEffect(() => {
@@ -35,12 +45,21 @@ const Frontpage = () => {
 
   const setSorting = (sortType) => {
     setSort(sortType);
-    fetchData(sortType);
+    fetchPosts(sortType);
   }
 
   const loadPosts = () => {
     return(posts.map((post) => 
       <Post post={post}/>
+    ))
+  }
+
+  const loadLeaderboard = () => {
+    return (leaderboard.map((user) =>
+      <p className="leaderboard leaderboard-items">
+        <span>{user.username}</span>
+        <span className="length">{user.length}</span>
+      </p>
     ))
   }
 
@@ -64,11 +83,19 @@ const Frontpage = () => {
           {loadPosts()}
         </div>
         <div className="sidebar">
-          <div className="sidebar-box about">
+          <div className="sidebar-box">
+            <h1>Leaderboard</h1>
+            <p className="leaderboard subheadings">
+              <span>Username</span>
+              <span>Posts</span>
+            </p>
+            {loadLeaderboard()}
+          </div>
+          <div className="sidebar-box">
             <h1>About Community</h1>
             <p>About the Imagepal Forum</p>
           </div>
-          <div className="sidebar-box rules">
+          <div className="sidebar-box">
             <h1>Rules</h1>
             <p>Do not post image with Text</p>
           </div>

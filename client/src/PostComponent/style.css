@@ -20,6 +20,10 @@
 .post .user {
   padding-left: 5%; 
 }
+.post .user .score {
+  float: right;
+  padding-right: 5%; 
+}
 .post .emojis {
   display: flex;
   flex-direction: row;

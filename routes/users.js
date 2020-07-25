@@ -133,6 +133,18 @@ router.post('/change/:type', checkLoggedIn, async (req, res) => {
   }
 });
 
+router.get('/leaderboard', async (req, res) => {
+  try {
+    const users = await User.aggregate([
+      { $project: { length: {$size: '$posts'}, posts: '$posts', username: '$username' } },
+      {$sort: {length: -1}}
+    ]);
+    res.status(200).json(users);
+  } catch (error) {
+    console.log('leaderboard', error);
+  }
+});
+
 async function checkDuplicateUser(req, res, next) {
   if(await checkElement("email", req.body.email.toLowerCase())) {
     // send error

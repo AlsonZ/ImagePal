@@ -21,7 +21,7 @@ const Posts = () => {
   },[])
 
   return(
-    <div>
+    <div className="post-container">
       {userPosts.map((post) => 
         <Post post={post}/>
       )}
@@ -123,12 +123,10 @@ const ChangePassword = () => {
 
 const Profile = () => {
 
-  // const [component, setComponent] = useState(<Posts/>);
   let { path, url } = useRouteMatch();
 
   return (
     <div className="profile">
-      {/* show posts like frontpage, sidebar has like "change password, change username, change email?, all lead to settings page with those options" */}
       <div className="main">
         <Switch>
           <Route exact path={`${path}/ChangePassword`} component={ChangePassword}/>

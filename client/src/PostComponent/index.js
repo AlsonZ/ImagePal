@@ -80,8 +80,24 @@ const Post = ({post}) => {
     }
 
   }
-
   const loadPost = () => {
+    return (
+      <>
+        <div className="user">
+          <span>
+            Posted by {post.author}
+          </span>
+          <span className="score">
+            Reactions: {post.score ? post.score : 0}
+          </span>
+        </div>
+        <div className="image">
+          <img src={post.imageUrl} height={post.height} width={post.width}/>
+        </div>
+      </>
+    )
+  }
+  const loadLink = () => {
     if(isFrontPage) {
       return(
         <Link 
@@ -92,31 +108,19 @@ const Post = ({post}) => {
           }} 
           className="postLink"
         >
-          <div className="user">
-            Posted by {post.author}
-          </div>
-          <div className="image">
-            <img src={post.imageUrl} height={post.height} width={post.width}/>
-          </div>
+          {loadPost()}
         </Link>
       )
     } else {
       return (
-        <>
-          <div className="user">
-            Posted by {post.author}
-          </div>
-          <div className="image">
-            <img src={post.imageUrl} height={post.height} width={post.width}/>
-          </div>
-        </>
+        loadPost()
       )
     }
   }
 
   return (
     <div className="post">
-      {loadPost()}
+      {loadLink()}
       <ul className={`emojis ${post.isComment}`}>
         <li className={emojis.love} onClick={()=>{handleEmojis({emoji: 'love'})}}>😍</li>
         <li className={emojis.happy} onClick={()=>{handleEmojis({emoji: 'happy'})}}>😊</li>

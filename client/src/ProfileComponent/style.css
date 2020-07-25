@@ -5,6 +5,7 @@
   margin-right: auto;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "main sidebar";
+  animation: fadeIn 1s;
 }
 
 .profile .main {
@@ -12,6 +13,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  animation: fadeIn 1s;
+}
+.profile .post-container {
+  animation: fadeIn 1s;
 }
 
 .profile .main-content {
@@ -23,6 +28,7 @@
   border: var(--border);
   display: flex;
   flex-direction: column;
+  animation: fadeIn 1s;
 }
 .profile .form-container {
   padding: 3rem;
