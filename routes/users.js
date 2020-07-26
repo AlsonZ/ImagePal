@@ -139,7 +139,8 @@ router.get('/leaderboard', async (req, res) => {
       { $project: { length: {$size: '$posts'}, posts: '$posts', username: '$username' } },
       {$sort: {length: -1}}
     ]);
-    res.status(200).json(users);
+    const data = users.slice(0, 10);
+    res.status(200).json(data);
   } catch (error) {
     console.log('leaderboard', error);
   }

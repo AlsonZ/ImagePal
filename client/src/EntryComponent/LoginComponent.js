@@ -15,13 +15,18 @@ const Login = (props) => {
     if(email === "" || password === "") {
       setErrorMessage('Please fill out all fields');
       setError("error-visible");
+      return false;
     } else if(!email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)) {
       setErrorMessage('Email is invalid');
       setError("error-visible");
+      return false;
     } else if(password.length <= 5) {
       setErrorMessage('Password must be longer than 6 characters');
       setError("error-visible");
-    } 
+      return false;
+    } else {
+      return true;
+    }
   }
 
   const sendLogin = async (user) => {
@@ -45,12 +50,14 @@ const Login = (props) => {
 
   const onClick = async (event) => {
     event.preventDefault();
-    checkInput();
-    let user = {
-      email: email,
-      password: password
+    const inputAllowed = await checkInput();
+    if(inputAllowed) {
+      let user = {
+        email: email,
+        password: password
+      }
+      sendLogin(user);
     }
-    sendLogin(user);
   }
 
   return (

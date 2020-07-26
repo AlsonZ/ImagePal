@@ -44,14 +44,15 @@ const Register = (props) => {
   const onClick = async (event) => {
     event.preventDefault();
     //check email and password is suitible
-    checkInput();
-    //send data to API
-    const user = {
-      email: email,
-      username: username,
-      password: password
+    const inputAllowed = await checkInput();
+    if(inputAllowed) {
+      const user = {
+        email: email,
+        username: username,
+        password: password
+      }
+      createNewUser(user);
     }
-    createNewUser(user);
   }
 
   return (
