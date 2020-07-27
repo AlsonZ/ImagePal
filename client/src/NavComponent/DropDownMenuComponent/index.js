@@ -3,7 +3,6 @@ import './style.css';
 import { ReactComponent as UserIcon } from '../../icons/user.svg';
 import { ReactComponent as MoonIcon } from '../../icons/moon.svg';
 import { ReactComponent as SunIcon } from '../../icons/sun.svg';
-import { ReactComponent as CogIcon } from '../../icons/cog.svg';
 import { ReactComponent as ExitIcon } from '../../icons/exit.svg';
 import { ThemeContext } from '../../Contexts/ThemeContext';
 import { UserContext } from '../../Contexts/UserContext';

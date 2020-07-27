@@ -85,15 +85,21 @@ router.post('/editpost', checkLoggedIn, checkCorrectAuthor,
 });
 
 router.delete('/deletepost', checkLoggedIn, checkCorrectAuthor, checkDeleteAllowed, async (req, res) => {
-  //delete the post
   try {
-    post = await Post.findByIdAndDelete(req.body.postID);
-    removePostFromUser(req.session.userID, req.body.postID);
-    res.status(200).json("successfully deleted")
+    if( req && req.placeholderRequired) {
+      const placeholder = 'https://res.cloudinary.com/azy/image/upload/v1595836894/imagepal/mocyztzvnm6aq3mkf4ab.png'
+      const post = await Post.findByIdAndUpdate(req.body.postID, {
+        imageUrl: placeholder,
+      }, {new:true});
+      res.status(200).json('Post has been replaced with placeholder');
+    } else {
+      post = await Post.findByIdAndDelete(req.body.postID);
+      removePostFromUser(req.session.userID, req.body.postID);
+      res.status(200).json("successfully deleted")
+    }
   } catch (error) {
     console.log('delete post: ', error);
   }
-  
 })
 
 router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction, async (req, res) => {
@@ -149,7 +155,7 @@ router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
   
 })
 
-const handleImage = async (file, fileName) => {
+const handleImage = async (file, fileName, req) => {
   const filepath = `./images/${fileName}`;
   file.mv(filepath, (error) => {
     if(error) {
@@ -160,7 +166,7 @@ const handleImage = async (file, fileName) => {
   try {
     // const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
     // return result.url;
-    return './images/chem.jpg'
+    return '../images/bio.jpg'
   } catch(error) {
     console.log('handleImage ',error);
   }

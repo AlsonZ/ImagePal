@@ -12,6 +12,7 @@ import {UserProvider} from './Contexts/UserContext';
 import {PostsProvider} from './Contexts/PostsContext';
 import {ThemeContext} from './Contexts/ThemeContext';
 import ProtectedRoute from './ProtectedRoute'
+import NotFound from './NotFoundComponent'
 
 function App() {
 
@@ -31,10 +32,10 @@ function App() {
                 <Route exact path="/Register" component={Register}/>  
                 <Route exact path="/Post/:id" component={PostPage}/>  
                 <ProtectedRoute path="/Profile" component={Profile}/>  
-                {/* <ProtectedRoute exact path="/Settings" component={Profile}/>   */}
                 <ProtectedRoute exact path="/EditPost/:id" component={EditPost}/>  
                 <ProtectedRoute exact path="/NewPost" component={NewPost}/>  
                 <ProtectedRoute exact path="/CommentOnPost/:id" component={CommentOnPost}/>  
+                <Route component={NotFound}/>
               </Switch>
             </div>
           </Router>
