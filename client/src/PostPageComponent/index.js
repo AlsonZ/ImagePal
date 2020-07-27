@@ -13,14 +13,10 @@ const PostPage = (props) => {
 
   const fetchData = async () => {
     const res = await fetch(`/API/posts/post/${window.location.pathname.split('/')[2]}`);
-    console.log(res.status);
     if(res.status === 200) {
       const resData = await res.json();
-      // console.log(resData);
       setpostData(resData);
       return resData;
-    } else {
-      //redirect to frontpage as post doesnt exist
     }
   }
   useEffect(() => {
@@ -56,13 +52,8 @@ const PostPage = (props) => {
       body: JSON.stringify(data),
     })
     if(res.status === 200) {
-      // resData = await res.json();
       //redirect to frontpage
       props.history.push('/');
-      console.log('this got deleted');
-    } else {
-      const resData = await res.json();
-      console.log(resData);
     }
   }
   const handleComment = () => {

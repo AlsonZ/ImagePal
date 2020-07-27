@@ -10,9 +10,7 @@ const Posts = () => {
   const fetchData = async() => {
     const res = await fetch('/API/users/posts');
     if(res.status === 200) {
-      console.log('success getting user posts');
       const resData = await res.json();
-      console.log(resData);
       setUserPosts(resData);
     }
   }

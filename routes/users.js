@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
     }
   } catch(error) {
     // error
-    console.log(error);
+    console.log('login error:', error);
     return res.status(500).json("error");
   }
 });
@@ -142,7 +142,7 @@ router.get('/leaderboard', async (req, res) => {
     const data = users.slice(0, 10);
     res.status(200).json(data);
   } catch (error) {
-    console.log('leaderboard', error);
+    console.log('leaderboard: ', error);
   }
 });
 

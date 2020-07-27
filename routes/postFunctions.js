@@ -47,7 +47,6 @@ const checkDeleteAllowed = (req, res, next) => {
 
 const checkFile = (req, res, next) => {
   if(!req.files) {
-    console.log('no file');
     return res.status(400).json('No File Found');
   } else {
     next();

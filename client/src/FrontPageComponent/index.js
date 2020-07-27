@@ -17,7 +17,6 @@ const Frontpage = () => {
     let res = await fetch(`/API/posts/frontpage/${sortType}/10`);
     if(res.status === 200) {
       const resData = await res.json();
-      console.log(resData);
       setPosts(resData);
     }
   }

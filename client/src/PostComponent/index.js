@@ -33,7 +33,6 @@ const Post = ({post}) => {
     loadReaction();
   },[])
   const updatePost = async(data) => {
-    console.log(data);
     let url = '/API/posts/updateEmoji';
     const res = await fetch(url, {
       method: 'POST',
@@ -42,7 +41,6 @@ const Post = ({post}) => {
     });
     if(res.status === 200) {
       const resData = await res.json();
-      console.log(resData);
       post = resData;
       return true;
     } else {
@@ -54,10 +52,7 @@ const Post = ({post}) => {
       let newState;
       let reaction;
       if(emojis[emoji] === 'active') { // remove reaction
-          // delete post.reactions[user.username]
-          // post.score -=1;
         newState = '';
-        // call on delete reaction route, provide user to remove
         reaction =  '' 
       } else { // add or change reaction
         reaction = emoji;
@@ -65,18 +60,11 @@ const Post = ({post}) => {
       }
       //update backend about post changes
       const updated = await updatePost({_id: post._id, reaction: reaction});
-      console.log(updated);
       if(updated) {
-        // console.log('inside updated runs')
-        // setEmojis({...initialState, [emoji]: newState});
         loadReaction();
-      } else {
-        //error
-        console.log('server error');
       }
     } else {
-      // alert user to login
-      console.log('login required');
+      console.log('login is required');
     }
 
   }

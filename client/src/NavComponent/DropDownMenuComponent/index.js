@@ -43,8 +43,6 @@ const DropDownMenu = (props) => {
       props.setActive('');
       window.location.reload();
     }
-    const resData = await res.json();
-    console.log(resData);
   }
 
   return(

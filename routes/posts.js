@@ -26,7 +26,6 @@ router.get('/post/:id', async (req,res) => {
   const id = req.params.id;
   try {
     const post = await Post.findById(id);
-    // console.log('post', post);
     if(post) {
       res.status(200).json(post);
     } else {
@@ -44,18 +43,16 @@ router.post('/newpost', checkLoggedIn, checkFile, async (req, res) => {
   if(imageLink === 'error') {
     return res.status(500);
   }
-  // console.log("this is imagelink " + imageLink);
   //make new post and save
   const post = new Post({
     author: req.body.author,
     imageUrl: imageLink,
     uploadDate: req.body.uploadedAt,
   });
-  // console.log(post);
   try {
     await post.save((error, post) => {
       if(error) {
-        console.log(error);
+        console.log('newpost: ', error);
       }
       updatePostFromUser(req.session.userID, post._id);
       return res.status(201).json(post._id);

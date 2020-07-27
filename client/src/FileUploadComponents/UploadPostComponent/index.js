@@ -30,7 +30,6 @@ const UploadPost = (props) => {
     }
   }
   const compressImage = async () => {
-    // console.log(`orignal file size ${inputFile.size/1024/1024}`); 
     const options = {
       maxSizeMB: 1,
       maxWidthOrHeight: 960,
@@ -38,12 +37,11 @@ const UploadPost = (props) => {
     }
     try {
       const cFile = await imageCompression(inputFile, options);
-      // console.log(`new file size ${cFile.size/1024/1024}`);
       showImagePreview(cFile);
       setCompressedFile(cFile);
       return cFile;
     } catch (error) {
-      console.log(error);
+      setErrorMessage('Failure to Compress File, Please try again later')
     }
   }
 
@@ -70,14 +68,12 @@ const UploadPost = (props) => {
       body: data,
     })
     const resData = await res.json();
-    console.log(resData);
     if(res.status === 200 || res.status === 201) {
       props.onSuccess(resData);
     } else if(res.status === 403 || res.status === 401 || res.status === 400) {
       setErrorMessage(resData);
     } else {
       setErrorMessage('Failure to edit or create post or comment')
-      console.log('Failure to edit or create post or comment');
     }
   }
 
