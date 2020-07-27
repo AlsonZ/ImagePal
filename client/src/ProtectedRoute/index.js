@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import {Route, Redirect} from 'react-router-dom'
 import {UserContext} from '../Contexts/UserContext'
+import Loading from './LoadingComponent';
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
   const [user] = useContext(UserContext)
@@ -10,9 +11,7 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
       render = {(props) => {
         if(user.loading) {
           return (
-            <div>
-              LOADING
-            </div>
+            <Loading/>
           )
         }
         if(user.username && user.email) {

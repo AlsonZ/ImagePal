@@ -1,0 +1,27 @@
+.loading {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-items: center;
+}
+.loading p {
+  font-size: 3rem;
+  display: flex;
+  place-items: center;
+}
+.loading p div {
+  text-align: center;
+}
+.loading p svg {
+  padding-top: 0.5rem;
+  padding-right: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+
+@media only screen and (max-width: 480px) {
+  .loading p {
+    flex-direction: column;
+  }
+}
