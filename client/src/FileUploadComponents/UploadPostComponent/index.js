@@ -10,6 +10,7 @@ const UploadPost = (props) => {
   const [fileName, setFileName] = useState("Choose File");
   const [inputFile, setInputFile] = useState('');
   const [compressedFile, setCompressedFile] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [image, setImage] = useState('');
   const url = props.url;
   const postID = props.postID ? props.postID : '';
@@ -50,7 +51,7 @@ const UploadPost = (props) => {
     e.preventDefault();
     let file = compressedFile ? compressedFile : await compressImage();
     if(!file) {
-      // choose a file error msg goes here
+      setErrorMessage('Please choose a file to upload')
       return;
     }
     if((file.size > inputFile.size)) {
@@ -72,7 +73,10 @@ const UploadPost = (props) => {
     console.log(resData);
     if(res.status === 200 || res.status === 201) {
       props.onSuccess(resData);
+    } else if(res.status === 403 || res.status === 401 || res.status === 400) {
+      setErrorMessage(resData);
     } else {
+      setErrorMessage('Failure to edit or create post or comment')
       console.log('Failure to edit or create post or comment');
     }
   }
@@ -80,11 +84,13 @@ const UploadPost = (props) => {
   const handlePreview = async (e) => {
     e.preventDefault();
     if(compressedFile) {
-      //image is already shown
+      //image is already shown so do nothing
     } else {
-      await compressImage();
+      let file = await compressImage();
+      if(!file) {
+        setErrorMessage('Please choose a file to upload')
+      }
     }
-    // const file = compressedFile ? compressedFile : await compressImage(); 
   }
 
   
@@ -93,6 +99,7 @@ const UploadPost = (props) => {
     <div className="upload-post-parent">
       <div className="upload-post">
         <h1>{title}</h1>
+        {errorMessage && <p className="error">{errorMessage}</p>}
         <form>
           {/* mabe need to add an upload icon here */}
           <label className="custom-file-input">

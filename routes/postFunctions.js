@@ -18,7 +18,7 @@ const checkCorrectAuthor = async (req, res, next) => {
   if(user.username === post.author) {
     next();
   } else {
-    res.status(401).json('Wrong User');
+    res.status(401).json('You are not the Author of this post');
   }
 
 }
@@ -28,7 +28,7 @@ const checkEditAllowed = (req, res, next) => {
   if(post.comments && post.comments.length <= 0 && !post.reactions) {
     next();
   } else {
-    res.status(403).json('post has comments or reactions');
+    res.status(403).json('This post has comments or reactions and cannot be deleted');
   }
 }
 
@@ -48,7 +48,7 @@ const checkDeleteAllowed = (req, res, next) => {
 const checkFile = (req, res, next) => {
   if(!req.files) {
     console.log('no file');
-    return res.status(400).json('no file');
+    return res.status(400).json('No File Found');
   } else {
     next();
   }

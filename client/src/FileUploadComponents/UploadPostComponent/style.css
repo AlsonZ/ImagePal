@@ -86,3 +86,8 @@
   max-width: 95%;
   max-height: 95%;
 }
+
+.upload-post .error {
+  color: red;
+  margin-left: 1rem;
+}

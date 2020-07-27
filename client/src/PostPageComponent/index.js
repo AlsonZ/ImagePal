@@ -42,8 +42,7 @@ const PostPage = (props) => {
         postID: post._id
       })
     } else {
-      // return(`/Post/${post._id}`)
-      return;
+      // do nothing
     }
   }
   const handleDelete = async () => {

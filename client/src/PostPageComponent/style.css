@@ -67,6 +67,12 @@
   color: var(--text);
 }
 
+.postpage .error {
+  padding: 0.6rem;
+  padding-bottom: 0.2rem;
+  color: red;
+}
+
 @media only screen and (max-width: 65rem) {
   .postpage {
     grid-template-columns: 1fr;

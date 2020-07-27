@@ -32,8 +32,6 @@ const Register = (props) => {
     });
     const resData = await res.json();
     if(resData.message === "registered") {
-      // setEmail('');
-      // setPassword('');
       props.history.push('/Login');
     } else {
       setErrorMessage(resData.error);
@@ -43,7 +41,6 @@ const Register = (props) => {
 
   const onClick = async (event) => {
     event.preventDefault();
-    //check email and password is suitible
     const inputAllowed = await checkInput();
     if(inputAllowed) {
       const user = {
