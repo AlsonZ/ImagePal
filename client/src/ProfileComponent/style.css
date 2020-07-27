@@ -1,6 +1,7 @@
 .profile {
   display: grid;
   width: 65rem;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
   grid-template-columns: 1fr 1fr;
@@ -10,18 +11,16 @@
 
 .profile .main {
   grid-area: main;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   animation: fadeIn 1s;
 }
-.profile .post-container {
-  animation: fadeIn 1s;
-}
 
 .profile .main-content {
   background-color: var(--box-bg);
-  width: 45rem;
+  width: 40rem;
   max-width: 95%;
   margin: 1rem;
   border-radius: var(--border-radius);
@@ -137,4 +136,27 @@
 .profile .success-visible {
   color: green;
   opacity: 1;
+}
+
+
+@media only screen and (max-width: 65rem) {
+  .profile {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    grid-template-areas: "sidebar " 
+                         "main ";
+    margin: 0 10%;
+  }
+  .profile .sidebar {
+    width: 100%;
+    margin: 1rem 0;
+  }
+  .profile .main .main-content {
+    width: auto;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .profile {
+    margin: 0;
+  }
 }

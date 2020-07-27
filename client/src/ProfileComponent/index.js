@@ -21,11 +21,11 @@ const Posts = () => {
   },[])
 
   return(
-    <div className="post-container">
+    <>
       {userPosts.map((post) => 
         <Post post={post}/>
       )}
-    </div>
+    </>
   )
 }
 
