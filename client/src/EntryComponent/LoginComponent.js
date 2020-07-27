@@ -38,8 +38,6 @@ const Login = (props) => {
     });
     const resData = await res.json();
     if(res.status === 200) {
-      // setEmail('');
-      // setPassword('');
       setUser(resData);
       props.history.push('/');
     } else {
@@ -59,6 +57,14 @@ const Login = (props) => {
       sendLogin(user);
     }
   }
+  const GuestLogin = async (event) => {
+    event.preventDefault();
+    let user = {
+      email: 'guest@guest.com',
+      password: 'guestpassword'
+    }
+    sendLogin(user);
+  }
 
   return (
     <form className="entry">
@@ -67,6 +73,7 @@ const Login = (props) => {
       <input type="email" placeholder="Email" className="input" onChange={event => setEmail(event.target.value)} autoComplete="off"></input>
       <input type="password" placeholder="Password" className="input" onChange={event => setPassword(event.target.value)} autoComplete="off"></input>
       <input type="submit" onClick={onClick} className="submit" value="Sign In"></input>
+      <input type="submit" onClick={GuestLogin} className="guest" value="Guest Sign In"></input>
       <Link to='/Register' className="entry-link">Don't have an account? Sign up</Link>
     </form>
   );

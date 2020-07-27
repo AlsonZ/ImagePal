@@ -44,19 +44,28 @@
   border: none;
   margin-bottom: 0.3rem;
 }
+.guest {
+  padding: 0.2rem;
+  margin-right: 0.1rem;
+  background-color: var(--text-accent);
+  color: white;
+  border: none;
+  border-radius: 0.1rem;
+}
 
-.submit:hover {
+.submit:hover, .guest:hover{
   filter: brightness(90%);
 }
 
-.submit:active {
+.submit:active, .guest:active {
   filter: brightness(80%);
 }
 
-.submit:focus {
+.submit:focus, .guest:focus {
   outline: none;
   box-shadow: 0 0 4px var(--text);
 }
+
 
 .entry-link {
   color: var(--text-accent);
@@ -79,13 +88,4 @@
 .error-visible {
   opacity: 1;
 }
-
-/* .normal-text {
-  color: var(--base-colour);
-  font-size: large;
-} */
-
-/* .logout {
-  margin-top: 2rem;
-} */
 
