@@ -153,7 +153,7 @@ router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
 })
 
 const handleImage = async (file, fileName, req) => {
-  const filepath = `./images/${fileName}`;
+  const filepath = `./tmp/${fileName}`;
   file.mv(filepath, (error) => {
     if(error) {
       console.log('handelImageMV ', error);
@@ -161,9 +161,9 @@ const handleImage = async (file, fileName, req) => {
     }
   })
   try {
-    // const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
-    // return result.url;
-    return '../images/bio.jpg'
+    const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
+    return result.url;
+    // return '../images/bio.jpg'
   } catch(error) {
     console.log('handleImage ',error);
   }
