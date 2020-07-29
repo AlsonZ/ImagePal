@@ -153,7 +153,10 @@ router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
 })
 
 const handleImage = async (file, fileName, req) => {
-  const filepath = `/tmp/${fileName}`;
+  const filepath = `./tmp/${fileName}`;
+  if(process.env.NODE_ENV === 'production') {
+    filepath = `/tmp/${fileName}`;
+  }
   file.mv(filepath, (error) => {
     if(error) {
       console.log('handelImageMV ', error);
