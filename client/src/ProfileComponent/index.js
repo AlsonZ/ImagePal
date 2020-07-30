@@ -20,8 +20,8 @@ const Posts = () => {
 
   return(
     <>
-      {userPosts.map((post) => 
-        <Post post={post}/>
+      {userPosts.map((post, index) => 
+        <Post post={post} key={index}/>
       )}
     </>
   )
@@ -122,6 +122,10 @@ const ChangePassword = () => {
 const Profile = () => {
 
   let { path, url } = useRouteMatch();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  },[])
 
   return (
     <div className="profile">

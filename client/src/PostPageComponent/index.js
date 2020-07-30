@@ -21,6 +21,7 @@ const PostPage = (props) => {
   }
   useEffect(() => {
     fetchData();
+    window.scrollTo(0, 0);
   },[])
   useEffect(() => {
     if(user.username === post.author) {
@@ -67,7 +68,7 @@ const PostPage = (props) => {
       return(
         post.comments.map((comment) => {
           const commentProp = {...comment, isComment: "isComment"}
-          return(<Post post={commentProp}/>)
+          return(<Post post={commentProp} isComment={true}/>)
         })
       )
     }

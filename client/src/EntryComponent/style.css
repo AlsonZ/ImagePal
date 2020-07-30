@@ -44,24 +44,24 @@
   border: none;
   margin-bottom: 0.3rem;
 }
-.guest {
+.demo {
   padding: 0.2rem;
-  margin-right: 0.1rem;
-  background-color: var(--text-accent);
+  float: right;
+  background-color: var(--text-dark-accent);
   color: white;
   border: none;
   border-radius: 0.1rem;
 }
 
-.submit:hover, .guest:hover{
+.submit:hover, .demo:hover{
   filter: brightness(90%);
 }
 
-.submit:active, .guest:active {
+.submit:active, .demo:active {
   filter: brightness(80%);
 }
 
-.submit:focus, .guest:focus {
+.submit:focus, .demo:focus {
   outline: none;
   box-shadow: 0 0 4px var(--text);
 }

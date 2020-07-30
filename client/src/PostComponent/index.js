@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../Contexts/UserContext';
 import './style.css';
 
-const Post = ({post}) => {
+const Post = (props) => {
   const [user] = useContext(UserContext);
+  let post = props.post;
+  const isComment = props.isComment || false;
   const isFrontPage = !window.location.pathname.includes('/',1);
   const initialState = {
     love: '',
@@ -75,12 +77,12 @@ const Post = ({post}) => {
           <span>
             Posted by {post.author}
           </span>
-          <span className="score">
+          {!isComment && <span className="score">
             Reactions: {post.score ? post.score : 0}
-          </span>
+          </span>}
         </div>
         <div className="image">
-          <img src={post.imageUrl} height={post.height} width={post.width}/>
+          <img src={post.imageUrl} height={post.height} width={post.width} alt="post image"/>
         </div>
       </>
     )

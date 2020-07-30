@@ -14,7 +14,7 @@
 }
 
 /* Menu Item */
-.menu-item {
+.menu-item, .username {
   height: 50px;
   max-width: 284px;
   display: flex;
@@ -30,6 +30,14 @@
 }
 .menu-item .icon {
   margin-right: 0.5rem;
+}
+
+.username {
+  cursor: initial;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  padding: 0 0.5rem;
 }
 
 @media only screen and (max-width: 600px) {

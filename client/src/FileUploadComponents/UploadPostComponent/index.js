@@ -70,7 +70,7 @@ const UploadPost = (props) => {
     const resData = await res.json();
     if(res.status === 200 || res.status === 201) {
       props.onSuccess(resData);
-    } else if(res.status === 403 || res.status === 401 || res.status === 400) {
+    } else if(res.status === 403 || res.status === 401 || res.status === 400 || res.status === 500) {
       setErrorMessage(resData);
     } else {
       setErrorMessage('Failure to edit or create post or comment')
@@ -109,7 +109,7 @@ const UploadPost = (props) => {
           </div>
         </form>
         <div className="img-parent">
-          <img src={image}/>
+          <img alt="" src={image}/>
         </div>
       </div>
     </div>

@@ -22,7 +22,7 @@ const DropDownItem = ({icon, name, onClick}) => {
 const DropDownMenu = (props) => {
 
   const [, setTheme] = useContext(ThemeContext);
-  const [user, setUser] = useContext(UserContext);
+  const [user] = useContext(UserContext);
   const [location, setLocation] = useState('');
 
   const handleThemeChange = (theme) => {
@@ -48,10 +48,14 @@ const DropDownMenu = (props) => {
   return(
     <div className="dropdownmenu">
       <div className="menu">
+        {user && <div className="username">
+          <span>
+            {`Welcome ${user.username}!`}
+          </span>
+        </div>}
         <DropDownItem icon={<MoonIcon/>} name="DarkMode" onClick={()=>{handleThemeChange('darkmode')}}/>
         <DropDownItem icon={<SunIcon/>} name="LightMode" onClick={()=>{handleThemeChange('lightmode')}}/>
         <DropDownItem icon={<UserIcon/>} name="Profile" onClick={()=>{handleLink('/profile')}}/>
-        {/* <DropDownItem icon={<CogIcon/>} name="Settings" onClick={()=>{handleLink('/settings')}}/> */}
         <DropDownItem icon={<ExitIcon/>} name="Logout" onClick={()=>{handleLogout()}}/>
       </div>
       {location && <Redirect push to={location}/>}

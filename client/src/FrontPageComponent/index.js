@@ -32,6 +32,7 @@ const Frontpage = () => {
   useEffect(() => {
     fetchPosts();
     fetchLeaderboard();
+    window.scrollTo(0, 0);
   },[])
 
   useEffect(() => {
@@ -48,14 +49,14 @@ const Frontpage = () => {
   }
 
   const loadPosts = () => {
-    return(posts.map((post) => 
-      <Post post={post}/>
+    return(posts.map((post, index) => 
+      <Post post={post} key={index}/>
     ))
   }
 
   const loadLeaderboard = () => {
-    return (leaderboard.map((user) =>
-      <p className="leaderboard leaderboard-items">
+    return (leaderboard.map((user, index) =>
+      <p className="leaderboard leaderboard-items" key={index}>
         <span>{user.username}</span>
         <span className="length">{user.length}</span>
       </p>
@@ -92,11 +93,13 @@ const Frontpage = () => {
           </div>
           <div className="sidebar-box">
             <h1>About Community</h1>
-            <p>About the Imagepal Forum</p>
+            <p>Imagepal is a forum where international people use images as a form of communication bypassing the language barrier.</p>
           </div>
           <div className="sidebar-box">
             <h1>Rules</h1>
             <p>Do not post image with Text</p>
+            <p>Posts with reactions or replies can not be edited.</p>
+            <p>Posts with replies will be replaced with a placeholder if the user tries to delete it.</p>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UploadPost from './UploadPostComponent';
+import { Redirect } from 'react-router-dom';
 
 export const CommentOnPost = (props) => {
   const postID = props.location.postID ? props.location.postID : window.location.pathname.split('/')[2];
@@ -16,19 +17,21 @@ export const EditPost = (props) => {
   const onSuccess = () => {
     props.history.push(`/post/${postID}`)
   }
-  const onFailure = () => {
-    //error msg or redirect to front page
-  }
   return(
     <UploadPost url="/API/posts/editpost" postID={postID} title="Edit Post" onSuccess={onSuccess}/>
   )
 }
 
 export const NewPost = (props) => {
+  const [location, setLocation] = useState('');
   const onSuccess = (postID) => {
-    props.history.push(`/post/${postID}`);
+    // props.history.push(`/post/${postID}`);
+    setLocation(postID);
   }
   return(
-    <UploadPost url="/API/posts/newpost" title="Create New Post" onSuccess = {onSuccess} />
+    <>
+      <UploadPost url="/API/posts/newpost" title="Create New Post" onSuccess = {onSuccess} />
+      {location && <Redirect push to={`/post/${location}`}/>}
+    </>
   )
 }

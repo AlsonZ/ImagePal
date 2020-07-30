@@ -41,7 +41,8 @@ router.post('/newpost', checkLoggedIn, checkFile, async (req, res) => {
   //upload image to cloudinary for storage
   const imageLink = await handleImage(req.files.file, req.body.fileName);
   if(imageLink === 'error') {
-    return res.status(500);
+    res.status(500).json('Cloudinary error');
+    return;
   }
   //make new post and save
   const post = new Post({
@@ -67,7 +68,8 @@ router.post('/editpost', checkLoggedIn, checkCorrectAuthor,
   // get url
   const imageLink = await handleImage(req.files.file, req.body.fileName);
   if(imageLink === 'error') {
-    return res.status(500);
+    res.status(500).json('Cloudinary error');
+    return;
   }
   // update post
   try {
@@ -132,7 +134,8 @@ router.post('/updateEmoji', checkLoggedIn, checkNewReaction, checkDeleteReaction
 router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
   const imageLink = await handleImage(req.files.file, req.body.fileName);
   if(imageLink === 'error') {
-    return res.status(500);
+    res.status(500).json('Cloudinary error');
+    return; 
   }
   const comment = {
     "imageUrl": imageLink,
@@ -147,7 +150,8 @@ router.post('/newComment/:postID', checkLoggedIn, async (req, res) => {
     },{new: true})
     res.status(200).json('success');
   } catch (error) {
-    console.log('New Comment: ', error)
+    console.log('New Comment: ', error);
+    res.status(500).json('Server Error');
   }
   
 })
@@ -163,12 +167,13 @@ const handleImage = async (file, fileName, req) => {
       return 'error';
     }
   })
+  console.log(filepath);
   try {
     const result = await cloudinary.v2.uploader.unsigned_upload(filepath,"imagepal", async=true);
-    return result.url;
-    // return '../images/bio.jpg'
+    return await result.url;
   } catch(error) {
     console.log('handleImage ',error);
+    return 'error';
   }
 }
 
