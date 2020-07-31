@@ -139,7 +139,6 @@ const Profile = () => {
       <div className="sidebar">
         <div className="sidebar-box about">
           <h1>Settings</h1>
-          <p>About the Imagepal Forum</p>
           <Link className="button" to={`${url}`}>View User Posts</Link>
           <Link className="button" to={`${url}/ChangePassword`}>Change Password</Link>
           <Link className="button" to={`${url}/ChangeEmail`}>Change Email</Link>

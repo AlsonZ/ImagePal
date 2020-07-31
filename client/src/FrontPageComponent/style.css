@@ -136,6 +136,7 @@
   cursor: pointer;
   user-select: none;
   z-index: 2;
+  transition: var(--speed);
 }
 .overlay .upload-button:hover {
   filter: brightness(80%);

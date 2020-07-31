@@ -31,7 +31,7 @@ const Nav = () => {
       </Link>
       {!isLoggedIn && <NavItem link="/login" text="Sign In"/>}
       {!isLoggedIn && <NavItem link="/register" text="Sign Up"/>}
-      {isLoggedIn && <NavItem link="" icon={<CaretIcon/>} active={active} setActive={setActive}>
+      {isLoggedIn && <NavItem link={``} icon={<CaretIcon/>} active={active} setActive={setActive}>
         <DropDownMenu active={active} setActive={setActive}/>
       </NavItem>}
     </NavBar>

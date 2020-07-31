@@ -26,7 +26,9 @@
 }
 .menu-item:hover, .menu-item:hover .icon svg {
   background-color: var(--item-bg-accent);
-  color: var(--text-accent)
+  color: var(--text-accent);
+  fill: var(--text-accent);
+  transition: background var(--speed);
 }
 .menu-item .icon {
   margin-right: 0.5rem;

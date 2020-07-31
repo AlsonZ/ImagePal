@@ -29,7 +29,7 @@ const PostPage = (props) => {
     } else {
       setIsAuthor(false);
     }
-  },[user])
+  },[user,post])
 
   const handleEdit = () => {
     // cannot edit if there is reactions or comments

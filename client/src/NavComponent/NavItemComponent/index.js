@@ -12,16 +12,35 @@ const Navitem = (props) => {
     }
   }
 
+  const loadItem = () => {
+    if(props.link) {
+      return(
+        <Link to={props.link} className='navitem'>
+          {props.icon && <span className="icon">
+            {props.icon}
+          </span>}
+          {props.text && <span className="navitem-text">
+            {props.text}
+          </span>}
+        </Link>
+      )
+    } else {
+      return(
+        <div className={`navitem ${props.active}`} onClick={() => {onClick()}}>
+          {props.icon && <span className="icon">
+            {props.icon}
+          </span>}
+          {props.text && <span className="navitem-text">
+            {props.text}
+          </span>}
+        </div>
+      )
+    }
+  }
+
   return(
     <li className="navitem-container">
-      <Link to={props.link} className={`navitem ${props.active}`} onClick={() => {onClick()}}>
-        {props.icon && <span className="icon">
-          {props.icon}
-        </span>}
-        {props.text && <span className="navitem-text">
-          {props.text}
-        </span>}
-      </Link>
+      {loadItem()}
       {props.active && props.children}
     </li>
   )
